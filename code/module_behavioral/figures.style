@@ -16,21 +16,22 @@ axes.axisbelow: True
 font.family: sans-serif
 grid.linestyle: -
 lines.solid_capstyle: round
+lines.markersize: 10
+axes.prop_cycle: cycler('color',   ['CBA6F7','E6A0C4', 'C6CDF7', 'D8A499', '7294D4'])
 
-axes.grid: False
-axes.facecolor: EAEAF2
-axes.edgecolor: white
-axes.linewidth: 0
+axes.grid: True
+axes.facecolor: white
+axes.edgecolor: black
+axes.linewidth: 1
 grid.color: white
-xtick.major.size: 0
-ytick.major.size: 0
-xtick.minor.size: 0
-ytick.minor.size: 0
-axes.spines.top = False
-axes.spine.right = False
+xtick.major.size: 5
+ytick.major.size: 5
+xtick.minor.size: 5
+ytick.minor.size: 5
+axes.spines.top: False
+axes.spines.right: False
 
 
 # Custom
 font.sans-serif: Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
-axes.prop_cycle: cycler('color', ['5A5B9F', 'D94F70', '009473', 'F0C05A', '7BC4C4', 'FF6F61'])
 image.cmap: RdPu

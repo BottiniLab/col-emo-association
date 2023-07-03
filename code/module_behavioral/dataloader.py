@@ -27,14 +27,21 @@ class DataLoader:
         :param location: sets the location to load the files from
         """
 
+
         self.context = context
         self.location = location
 
         self.average_color_matrix = None
+        self.individual_color_matrix = None
+
         self.average_emotion_matrix = None
+
         self.average_emotion_color_ranking_matrix = None
-        self.emotion_color_rgb_matrix = None
+        self.individual_emotion_color_ranking_matrix = None
+
         self.average_emotion_color_rgb_matrix = None
+        self.individual_emotion_color_rgb_matrix = None
+
 
         if self.context in [1, 3, 5, 6]:
             self.emotion = self.EMOTION_LABELS_NORMAL
@@ -75,6 +82,9 @@ class DataLoader:
 
         self.average_color_matrix = (average_color_matrix + average_color_matrix.T)/14
 
+        if self.context == 5:
+            self.individual_color_matrix = data
+
     def load_emotion(self):
 
         data = np.load(self.location+'/participantsEmotion.npy', allow_pickle=True).item()
@@ -104,11 +114,13 @@ class DataLoader:
         average_emotion_color_ranking_matrix = average_emotion_color_ranking_matrix / len(data.keys())
 
         self.average_emotion_color_ranking_matrix = average_emotion_color_ranking_matrix
+        if self.context == 5:
+            self.individual_emotion_color_ranking_matrix = data
 
     def load_rgb_emotion_color_association(self):
 
         # shape -> participants x emotions x rgb values
-        self.emotion_color_rgb_matrix = np.load(self.location+'/allColorResponses.npy', allow_pickle=True)
+        self.individual_emotion_color_rgb_matrix = np.load(self.location+'/allColorResponses.npy', allow_pickle=True)
 
-        self.average_emotion_color_rgb_matrix = np.average(self.emotion_color_rgb_matrix, axis=0)/255
+        self.average_emotion_color_rgb_matrix = np.average(self.individual_emotion_color_rgb_matrix, axis=0)/255
 

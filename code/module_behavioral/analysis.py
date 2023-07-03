@@ -110,6 +110,37 @@ def circle_fitting_and_regression(emotion_embedding, color_embedding, color_rank
     return center_emotion, radius, emotion_center_distances, color_center_distances, grey_center_distance
 
 
+def sighted_blind_similarity(sighted_color_embedding, sighted_average_color_emotion_association, blind_color_matrix, blind_color_emotion_association_matrix):
+
+    sighted_color_pairwise = pairwise_distances(sighted_color_embedding)
+
+    ##for blind participants, do PCA on their individual color matrices
+    participants_color_pca_pairwise_distance = {}
+    for p in blind_color_matrix.keys():
+        matrix = blind_color_matrix[p]
+        dims = reduce_dimensions(matrix)
+        participants_color_pca_pairwise_distance[p] = pairwise_distances(dims)
+
+    ##we calculate how similar their individual color wheel is to the sighted average
+    color_stability = []
+    for p in blind_color_emotion_association_matrix.keys():
+        color_stability.append(kendalltau(participants_color_pca_pairwise_distance[p], sighted_color_pairwise)[0])
+    color_stability = np.asarray(color_stability)
+
+    ##we calculate how similar their individual color-emotion associations are to the sighted average
+    color_emotion_stability = []
+    for p in blind_color_emotion_association_matrix.keys():
+        color_emotion_stability.append(kendalltau(blind_color_emotion_association_matrix[p], sighted_average_color_emotion_association)[0])
+    color_emotion_stability = np.asarray(color_emotion_stability)
+
+    return color_stability, color_emotion_stability
+
+
+
+
+
+
+
 
 
 

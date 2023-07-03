@@ -41,6 +41,7 @@ class DataLoader:
 
         self.average_emotion_color_rgb_matrix = None
         self.individual_emotion_color_rgb_matrix = None
+        self.reported_confidence = None
 
 
         if self.context in [1, 3, 5, 6]:
@@ -121,6 +122,5 @@ class DataLoader:
 
         # shape -> participants x emotions x rgb values
         self.individual_emotion_color_rgb_matrix = np.load(self.location+'/allColorResponses.npy', allow_pickle=True)
-
         self.average_emotion_color_rgb_matrix = np.average(self.individual_emotion_color_rgb_matrix, axis=0)/255
-
+        self.reported_confidence = np.load(self.location+'/participantReportedConfidence.npy', allow_pickle=True)

@@ -41,6 +41,8 @@ The files in the **processeddata** folder follow the following structure:
     - Dictionary with each key storing the participant's emotion to color association as a matrix. 
 - load *allColorResponses.npy* with `np.load(<filename>, allow_pickle=True)`
   - Stores the response for each participant as an array.
+- load *participantReportedConfidence.npy* with `np.load(<filename>, allow_pickle=True)`
+- Stores the average reported confidence for each emotion in the experiment. 
 - Check dataloader module for the further details on how to read the matrix.
 ---
 

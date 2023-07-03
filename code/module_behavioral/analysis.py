@@ -1,13 +1,10 @@
 import numpy as np
 from sklearn.decomposition import PCA
-from scipy.stats import kendalltau
-from sklearn.metrics import euclidean_distances, pairwise_distances
-from sklearn.manifold import MDS
-from scipy.spatial.distance import euclidean
-from scipy.stats import spearmanr
+from sklearn.metrics import pairwise_distances
 from scipy.stats import kendalltau
 import circle_fit as cf
-from tqdm import tqdm
+from colormath.color_objects import sRGBColor, HSLColor
+from colormath.color_conversions import convert_color
 
 def reduce_dimensions(matrix, dims=2):
     pca = PCA(n_components=dims)
@@ -136,9 +133,27 @@ def sighted_blind_similarity(sighted_color_embedding, sighted_average_color_emot
     return color_stability, color_emotion_stability
 
 
+def closest_color(matrix1, matrix2):
 
+    closest_colors = []
+    for c1 in matrix1:
+        distances = []
+        for c2 in matrix2:
+            distances.append(np.linalg.norm(c1-c2))
+        idx = np.argsort(distances)
+        closest_colors.append(idx[0])
+    closest_colors = np.asarray(closest_colors)
 
+    return closest_colors
 
+def convert_array_to_hsl(rgbarray):
+    hslvalues = []
+    for c in rgbarray:
+        srgb = sRGBColor(c[0], c[1], c[2])
+        hsl = convert_color(srgb, HSLColor)
+        hslvalues.append(hsl.get_value_tuple())
+    hslvalues = np.asarray(hslvalues)
+    return hslvalues
 
 
 

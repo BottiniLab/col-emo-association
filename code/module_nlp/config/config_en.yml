@@ -1,0 +1,90 @@
+# Configuration file to use as input for functions of the NLP module.
+# -------------------------------------------------------------------
+
+#---------#
+# GLOBALS #
+#---------#
+
+# Path to the feather file containing the english wiki-news-300d-1M model
+# embeddings
+define: &model_path '/data/nlp/models/wiki-news.feather'
+# Path to the feather file containing the Italian common crowl + wiki model
+# embeddings
+define: &it_model /Data/Large_files/cc.it.300.feather
+# Path to the original human generated colour and emotion wheel coordinates
+define: &path_col_wheel '/Data/Wheels/colorwheel_coords.csv'
+define: &path_em_wheel '/Data/Wheels/emotionwheel_coords.csv'
+# Path to the coordinates of the wheels generate by the osgood dimensions using
+# Marelli analysis and representative words
+define: &path_centroids '/Data/Osgood/centroids_cleaned.csv'
+# Path to the json file with the color and emotion word embeddings
+define: &ce_embeddings '/Data/words.json'
+# Path to the csv file holding the coordinates of colors and emotions in the control space
+define: &path2control  '/Data/Osgood/Coordinates/centroids_control.csv'
+# List with the color words to use int he analysis
+define: &color_words ['green', 'orange', 'yellow', 'blue', 'purple', 'red']
+# List with the emotion words to use in the analysis
+define: &emotion_words ['surprised', 'excited', 'serene', 'happy', 'satisfied',
+'calm', 'tired', 'bored', 'depressed', 'sad', 'frustrated', 'afraid', 'angry',
+'stressed', 'astonished', 'sleepy', 'alarmed', 'disgusted']
+# Path to the folder with the control RDMs
+define: &path2control_rdm '/Data/Osgood/RDM/Control/'
+# Osgood representative words:
+define: &valence [good, bad]
+define: &arousal [arousing, dull]
+define: &dominance [win, uncontrollable]
+# Osgood Representative words for the italian version
+define: &it_valence [positivo, negativo]
+define: &it_arousal [attivo, tranquillo]
+define: &it_dominance [vincere, passivo]
+# Path to the raw single subjects similarity matrices (.npy file) of the blind
+# participants
+define: &raw_emotions_blind /Data/Color_words/participantsColorTestingItalianBlind.npy
+define: &raw_colors_blind /Data/Color_words/participantsEmotionTestingItalianBlind.npy
+define: &raw_associate_blind /Data/Color_words/participantsEmotionColorAssociationTestingItalianBlind.npy
+# Mapping between english and italian color and emotion words
+define: &emotion_map
+  surprised: sorpreso
+  excited: entusiasta
+  serene: sereno
+  happy: allegro
+  satisfied: soddisfatto
+  calm: calmo
+  tired: stanco
+  bored: annoiato
+  depressed: depresso
+  sad: triste
+  frustrated: frustrato
+  afraid: spaventato
+  angry: arrabbiato
+  stressed: stressato
+  astonished: stupito
+  sleepy: assonnato
+  alarmed: allarmato
+  disgusted: disgustato
+define: &color_map
+  green: verde
+  orange: arancione
+  yellow: giallo
+  blue: blu
+  purple: viola
+  red: rosso
+
+
+#-----------------------------------------------------------------------------#
+# osgood.get_wheel()
+#-----------------------------------------------------------------------------#
+get_wheel:
+  # Path to the feather file containing the english wiki-news-300d-1M model
+  # embeddings
+  model: *model_path
+  # Osgood representative words
+  valence: *valence
+  arousal: *arousal
+  # List with the color words to use int he analysis
+  color_words: *color_words
+  emotion_words: *emotion_words
+  # Where to save the table with the coordinates
+  save_coords: /data/nlp/coordinates/osgood_coords.csv
+  # Location of the neighbours used to compute the centroids
+  neighbours: /data/nlp/neighbours/neighbours_osgood.pkl 

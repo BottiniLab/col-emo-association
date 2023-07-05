@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='432.00pt' height='432.00pt' viewBox='0 0 432.00 432.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw0MzIuMDB8MC4wMHw0MzIuMDA='>
+    <rect x='0.00' y='0.00' width='432.00' height='432.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHw0MzIuMDA=)'>
+<rect x='0.000000000000032' y='0.00' width='432.00' height='432.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpMzMuMTV8NDI2LjUyfDUuNDh8Mzk4LjI0'>
+    <rect x='33.15' y='5.48' width='393.38' height='392.76' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMzMuMTV8NDI2LjUyfDUuNDh8Mzk4LjI0)'>
+<rect x='33.15' y='5.48' width='393.38' height='392.76' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<polyline points='33.15,361.40 426.52,361.40 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='33.15,257.64 426.52,257.64 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='33.15,153.87 426.52,153.87 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='33.15,50.10 426.52,50.10 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='53.29,398.24 53.29,5.48 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='157.03,398.24 157.03,5.48 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='260.76,398.24 260.76,5.48 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='364.50,398.24 364.50,5.48 ' style='stroke-width: 0.53; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='33.15,309.52 426.52,309.52 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='33.15,205.75 426.52,205.75 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='33.15,101.99 426.52,101.99 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='105.16,398.24 105.16,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='208.90,398.24 208.90,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='312.63,398.24 312.63,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<polyline points='416.37,398.24 416.37,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
+<circle cx='408.64' cy='233.44' r='5.19' style='stroke-width: 0.71; stroke: #00FF00; fill: #00FF00;' />
+<circle cx='210.88' cy='36.63' r='5.19' style='stroke-width: 0.71; stroke: #FFA500; fill: #FFA500;' />
+<circle cx='77.16' cy='155.11' r='5.19' style='stroke-width: 0.71; stroke: #FFFF00; fill: #FFFF00;' />
+<circle cx='246.48' cy='323.07' r='5.19' style='stroke-width: 0.71; stroke: #0000FF; fill: #0000FF;' />
+<circle cx='147.64' cy='332.89' r='5.19' style='stroke-width: 0.71; stroke: #A020F0; fill: #A020F0;' />
+<circle cx='162.57' cy='153.38' r='5.19' style='stroke-width: 0.71; stroke: #FF0000; fill: #FF0000;' />
+<circle cx='265.86' cy='152.92' r='5.19' style='stroke-width: 0.71; stroke: #E64200; fill: #E64200;' />
+<circle cx='330.81' cy='23.33' r='5.19' style='stroke-width: 0.71; stroke: #AB4600; fill: #AB4600;' />
+<circle cx='368.59' cy='276.76' r='5.19' style='stroke-width: 0.71; stroke: #007065; fill: #007065;' />
+<circle cx='321.82' cy='240.73' r='5.19' style='stroke-width: 0.71; stroke: #004C76; fill: #004C76;' />
+<circle cx='354.18' cy='87.67' r='5.19' style='stroke-width: 0.71; stroke: #566200; fill: #566200;' />
+<circle cx='359.22' cy='118.65' r='5.19' style='stroke-width: 0.71; stroke: #4E6700; fill: #4E6700;' />
+<circle cx='94.96' cy='376.43' r='5.19' style='stroke-width: 0.71; stroke: #6100B3; fill: #6100B3;' />
+<circle cx='127.34' cy='380.39' r='5.19' style='stroke-width: 0.71; stroke: #7F00E3; fill: #7F00E3;' />
+<circle cx='106.52' cy='237.74' r='5.19' style='stroke-width: 0.71; stroke: #FF7F00; fill: #FF7F00;' />
+<circle cx='126.08' cy='376.95' r='5.19' style='stroke-width: 0.71; stroke: #7F00E3; fill: #7F00E3;' />
+<circle cx='132.59' cy='208.69' r='5.19' style='stroke-width: 0.71; stroke: #FF7F00; fill: #FF7F00;' />
+<circle cx='169.61' cy='174.62' r='5.19' style='stroke-width: 0.71; stroke: #FF7F00; fill: #FF7F00;' />
+<circle cx='97.84' cy='167.29' r='5.19' style='stroke-width: 0.71; stroke: #FF7F00; fill: #FF7F00;' />
+<circle cx='280.77' cy='101.96' r='5.19' style='stroke-width: 0.71; stroke: #E65900; fill: #E65900;' />
+<circle cx='252.65' cy='148.99' r='5.19' style='stroke-width: 0.71; stroke: #ED4700; fill: #ED4700;' />
+<circle cx='150.07' cy='296.03' r='5.19' style='stroke-width: 0.71; stroke: #7F00FF; fill: #7F00FF;' />
+<circle cx='170.17' cy='88.41' r='5.19' style='stroke-width: 0.71; stroke: #FF7F00; fill: #FF7F00;' />
+<circle cx='51.03' cy='245.97' r='5.19' style='stroke-width: 0.71; stroke: #B27F33; fill: #B27F33;' />
+<text x='408.64' y='233.79' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.22px' lengthAdjust='spacingAndGlyphs'>GREEN</text>
+<text x='210.88' y='36.99' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='4.08px' lengthAdjust='spacingAndGlyphs'>ORANGE</text>
+<text x='77.16' y='155.47' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.88px' lengthAdjust='spacingAndGlyphs'>YELLOW</text>
+<text x='246.48' y='323.42' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='2.46px' lengthAdjust='spacingAndGlyphs'>BLUE</text>
+<text x='147.64' y='333.25' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.64px' lengthAdjust='spacingAndGlyphs'>PURPLE</text>
+<text x='162.57' y='153.74' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='1.90px' lengthAdjust='spacingAndGlyphs'>RED</text>
+<text x='265.86' y='153.27' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='5.29px' lengthAdjust='spacingAndGlyphs'>SURPRISED</text>
+<text x='330.81' y='23.69' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.95px' lengthAdjust='spacingAndGlyphs'>EXCITED</text>
+<text x='368.59' y='277.11' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.59px' lengthAdjust='spacingAndGlyphs'>SERENE</text>
+<text x='321.82' y='241.09' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.16px' lengthAdjust='spacingAndGlyphs'>HAPPY</text>
+<text x='354.18' y='88.03' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='4.77px' lengthAdjust='spacingAndGlyphs'>SATISFIED</text>
+<text x='359.22' y='119.01' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='2.71px' lengthAdjust='spacingAndGlyphs'>CALM</text>
+<text x='94.96' y='376.79' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='2.79px' lengthAdjust='spacingAndGlyphs'>TIRED</text>
+<text x='127.34' y='380.75' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.33px' lengthAdjust='spacingAndGlyphs'>BORED</text>
+<text x='106.52' y='238.10' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='5.44px' lengthAdjust='spacingAndGlyphs'>DEPRESSED</text>
+<text x='126.08' y='377.30' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='1.92px' lengthAdjust='spacingAndGlyphs'>SAD</text>
+<text x='132.59' y='209.05' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='6.07px' lengthAdjust='spacingAndGlyphs'>FRUSTRATED</text>
+<text x='169.61' y='174.98' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.48px' lengthAdjust='spacingAndGlyphs'>AFRAID</text>
+<text x='97.84' y='167.65' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.32px' lengthAdjust='spacingAndGlyphs'>ANGRY</text>
+<text x='280.77' y='102.31' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='4.65px' lengthAdjust='spacingAndGlyphs'>STRESSED</text>
+<text x='252.65' y='149.35' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='6.19px' lengthAdjust='spacingAndGlyphs'>ASTONISHED</text>
+<text x='150.07' y='296.39' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='3.36px' lengthAdjust='spacingAndGlyphs'>SLEEPY</text>
+<text x='170.17' y='88.77' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='4.62px' lengthAdjust='spacingAndGlyphs'>ALARMED</text>
+<text x='51.03' y='246.33' text-anchor='middle' style='font-size: 0.00px; font-family: "Liberation Sans";' textLength='5.46px' lengthAdjust='spacingAndGlyphs'>DISGUSTED</text>
+<text x='399.88' y='228.63' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='35.54px' lengthAdjust='spacingAndGlyphs'>GREEN</text>
+<text x='219.68' y='31.79' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='45.07px' lengthAdjust='spacingAndGlyphs'>ORANGE</text>
+<text x='68.52' y='150.36' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='42.82px' lengthAdjust='spacingAndGlyphs'>YELLOW</text>
+<text x='237.85' y='335.66' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='27.15px' lengthAdjust='spacingAndGlyphs'>BLUE</text>
+<text x='138.98' y='345.44' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='40.19px' lengthAdjust='spacingAndGlyphs'>PURPLE</text>
+<text x='171.25' y='148.60' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='21.05px' lengthAdjust='spacingAndGlyphs'>RED</text>
+<text x='274.51' y='165.59' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='58.49px' lengthAdjust='spacingAndGlyphs'>SURPRISED</text>
+<text x='339.44' y='18.62' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='43.62px' lengthAdjust='spacingAndGlyphs'>EXCITED</text>
+<text x='377.27' y='272.02' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='39.70px' lengthAdjust='spacingAndGlyphs'>SERENE</text>
+<text x='313.13' y='253.42' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='34.81px' lengthAdjust='spacingAndGlyphs'>HAPPY</text>
+<text x='345.58' y='100.28' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='52.68px' lengthAdjust='spacingAndGlyphs'>SATISFIED</text>
+<text x='350.49' y='131.24' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='29.81px' lengthAdjust='spacingAndGlyphs'>CALM</text>
+<text x='86.20' y='389.13' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='30.92px' lengthAdjust='spacingAndGlyphs'>TIRED</text>
+<text x='135.97' y='393.00' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='36.84px' lengthAdjust='spacingAndGlyphs'>BORED</text>
+<text x='115.29' y='232.92' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='60.15px' lengthAdjust='spacingAndGlyphs'>DEPRESSED</text>
+<text x='117.36' y='372.15' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='21.15px' lengthAdjust='spacingAndGlyphs'>SAD</text>
+<text x='141.18' y='203.97' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='67.07px' lengthAdjust='spacingAndGlyphs'>FRUSTRATED</text>
+<text x='160.92' y='187.28' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='38.47px' lengthAdjust='spacingAndGlyphs'>AFRAID</text>
+<text x='106.49' y='179.92' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='36.56px' lengthAdjust='spacingAndGlyphs'>ANGRY</text>
+<text x='286.21' y='97.11' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='51.48px' lengthAdjust='spacingAndGlyphs'>STRESSED</text>
+<text x='243.97' y='144.19' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='68.39px' lengthAdjust='spacingAndGlyphs'>ASTONISHED</text>
+<text x='141.48' y='308.63' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='37.02px' lengthAdjust='spacingAndGlyphs'>SLEEPY</text>
+<text x='178.84' y='83.71' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='50.93px' lengthAdjust='spacingAndGlyphs'>ALARMED</text>
+<text x='66.90' y='258.55' text-anchor='middle' style='font-size: 11.04px; font-family: "Liberation Sans";' textLength='60.31px' lengthAdjust='spacingAndGlyphs'>DISGUSTED</text>
+</g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHw0MzIuMDA=)'>
+<polyline points='33.15,398.24 33.15,5.48 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='26.70' y='313.09' text-anchor='end' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='8.94px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='26.70' y='209.32' text-anchor='end' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='5.72px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='26.70' y='105.56' text-anchor='end' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='5.72px' lengthAdjust='spacingAndGlyphs'>1</text>
+<polyline points='28.89,309.52 33.15,309.52 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<polyline points='28.89,205.75 33.15,205.75 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<polyline points='28.89,101.99 33.15,101.99 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<polyline points='33.15,398.24 426.52,398.24 ' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<polyline points='105.16,402.49 105.16,398.24 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<polyline points='208.90,402.49 208.90,398.24 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<polyline points='312.63,402.49 312.63,398.24 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<polyline points='416.37,402.49 416.37,398.24 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
+<text x='105.16' y='411.83' text-anchor='middle' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='8.94px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='208.90' y='411.83' text-anchor='middle' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='5.72px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='312.63' y='411.83' text-anchor='middle' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='5.72px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='416.37' y='411.83' text-anchor='middle' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='5.72px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='229.83' y='424.12' text-anchor='middle' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='36.44px' lengthAdjust='spacingAndGlyphs'>Valence</text>
+<text transform='translate(12.62,201.86) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #151515; font-family: "Noto Sans";' textLength='35.73px' lengthAdjust='spacingAndGlyphs'>Arousal</text>
+</g>
+</svg>

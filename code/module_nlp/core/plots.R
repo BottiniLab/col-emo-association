@@ -6,6 +6,9 @@ library("ggsignif")
 library("ggrepel")
 library("scales")
 
+# Suppress existing file warnings
+options(warn = -1)
+
 # Create custom theme common to all plots
 ce_theme <- theme(
   # Panel background color
@@ -32,12 +35,9 @@ ce_theme <- theme(
   panel.grid.minor = element_line(color = "white"),
 )
 
-plot_osgood <- function(file_name = "centroids_cleaned.csv", is_geo = F,
-                      save_colors = "centroids_colors_cleaned.png", 
-                      save_emotions = "centroids_emotions_cleaned.png", 
-                      save_both = "centroids_both_cleaned.png", 
-                      xlab = 'Valence', ylab = 'Arousal',
-                      style = ce_theme) {
+# Plot figures 7A and 7B
+plot_osgood <- function(file_name, save_colors, save_emotions,
+                      xlab = 'Valence', ylab = 'Arousal', style = ce_theme) {
   
   data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
   data$index <- toupper(data$index)
@@ -69,7 +69,14 @@ plot_osgood <- function(file_name = "centroids_cleaned.csv", is_geo = F,
   save_to <- paste0("../figures/", save_emotions)
   dir.create(file.path(dirname(save_to)))
   ggsave(save_to, plot=scatter_emotions, width = 6, height = 6)
-  
+}
+
+# Plot figure 7E 
+plot_both <- function(file_name, is_geo = F, save_both,
+                      xlab = 'Valence', ylab = 'Arousal', style = ce_theme) {
+
+  data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
+  data$index <- toupper(data$index)
   if (!is_geo) {
   cols <- as.character(data$fill_color)
   names(cols) <- as.character(data$index)
@@ -94,6 +101,7 @@ args = commandArgs(trailingOnly = TRUE)
 switch (args,
   "plot_osgood" = plot_osgood(file_name = "osgood_coords.csv",
                           save_colors = "7A.svg",
-                          save_emotions = "7B.svg",
+                          save_emotions = "7B.svg"),
+  "plot_both" = plot_both(file_name = "osgood_coords.csv",
                           save_both = "7E.svg")
 )

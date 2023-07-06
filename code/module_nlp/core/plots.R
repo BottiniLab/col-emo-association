@@ -95,6 +95,62 @@ plot_both <- function(file_name, is_geo = F, save_both,
   }
 }
 
+rsm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
+                     plabels = c("", "", "")) {
+  data <- read.csv(paste0("/home/mattia.silvestri-1/Git/coloremotion-2/Data/Osgood/Correlations/", csv_name[1]))
+  data2 <- read.csv(paste0("/home/mattia.silvestri-1/Git/coloremotion-2/Data/Osgood/Correlations/", csv_name[2]))
+  if (data2$p_val[1] < 0.001) {
+    pval_ft <- "p < 0.001"
+  }
+  else {
+    pval_ft <- paste0("p = ", round(data2$p_val[1], 3))
+  }
+
+  if (data2$p_val[2] < 0.001) {
+    pval_ft2d <- "p < 0.001"
+  }
+  else {
+    pval_ft2d <- paste0("p = ", round(data2$p_val[2], 3))
+  }
+
+  if (data2$p_val[3] < 0.001) {
+    pval_control <- "p < 0.001"
+  }
+  else {
+    pval_control <- paste0("p = ", round(data2$p_val[3], 3))
+  }
+   # Generate plots
+  ggplot(data, aes(x=factor(X), y=coefficient, fill=as.factor(round(coefficient, 3)))) +
+    scale_x_discrete(limits = factor(data$X)) +
+    ylim(ylim[1], ylim[2]) +
+    geom_bar(stat = "identity") +
+    scale_fill_hue(c = 40, name = "r-coefficients", limits = factor(round(data$coefficient, 3))) +
+    geom_text(aes(y = coefficient + 0.02 * sign(coefficient), label = plabels), 
+    size = 7) +
+    geom_signif(comparisons = list(c("fasttext", data$X[1])),
+                annotations = pval_ft,
+                y_position = y_position, tip_length = 0, vjust = -0.5) +
+    geom_signif(comparisons = list(c("fasttext2d", data$X[1])),
+                annotations = pval_ft2d,
+                y_position = y_position + 0.07, tip_length = 0, vjust = -0.5) +
+    geom_signif(comparisons = list(c("controlspace", data$X[1])),
+                annotations = pval_control,
+                y_position = y_position + 0.14, tip_length = 0, vjust = -0.5) +
+    ggtitle(title) +
+    xlab("Condition") + ylab("Coefficients") +
+    theme(
+      plot.title = element_text(size = 14, hjust = 0.5),
+      axis.title.x = element_text(size = 12),
+      axis.title.y = element_text(size = 12),
+      axis.text.x = element_text(size = 12)
+      ) 
+  
+  save_to <- paste0("./Reports/Results/Osgood/", file_name, ".png") 
+  dir.create(file.path(dirname(save_to)))
+  ggsave(save_to)
+
+}
+
 # Select function from command line
 args = commandArgs(trailingOnly = TRUE)
 

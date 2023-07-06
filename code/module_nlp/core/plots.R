@@ -19,7 +19,7 @@ ce_theme <- theme(
   legend.background = element_blank(),
   legend.key = element_blank(),
   legend.text = element_text(color = "#151515"),
-  legend.title = element_blank(),
+  # legend.title = element_blank(),
   # Tick settings
   axis.ticks = element_line(color = "#151515"),
   # Direction of ticks
@@ -124,7 +124,7 @@ rdm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
     scale_x_discrete(limits = factor(data$X)) +
     ylim(ylim[1], ylim[2]) +
     geom_bar(stat = "identity") +
-    scale_colour_discrete(type = c("#CBA6F7","#E6A0C4", "#C6CDF7", "#D8A499", "#7294D4"), name = "rho-coefficients", limits = factor(round(data$coefficient, 3))) +
+    scale_fill_manual(values = c("#CBA6F7","#E6A0C4", "#C6CDF7", "#D8A499", "#7294D4"), name = "rho-coefficients", limits = factor(round(data$coefficient, 3))) +
     geom_text(aes(y = coefficient + 0.02 * sign(coefficient), label = plabels), 
     size = 7) +
     geom_signif(comparisons = list(c("fasttext", data$X[1])),
@@ -165,9 +165,14 @@ switch (args,
                               y_position = 0.6, ylim = c(-0.2,0.9),
                               file_name = "7C.svg",
                               plabels = c("", "", "", "")),
-  "rdm_osgood_em" = rdm_corr(c("Difference/emotions_spearman1.csv",
-                               "Difference/emotions_spearman2.csv"),
+  "rdm_osgood_em" = rdm_corr(c("emotions_spearman1.csv",
+                               "emotions_spearman2.csv"),
                              y_position = 0.6, ylim = c(-0.1,0.9),
                              file_name = "7D.svg",
                              plabels = c("****", "****", "", "")),
+  "rdm_osgood_both" = rdm_corr(c("osgoodspace1.csv",
+                               "osgoodspace2.csv"),
+                             y_position = 0.6, ylim = c(-0.1,0.9),
+                             file_name = "7F.svg",
+                             plabels = c("**", "", "", "")),
 )

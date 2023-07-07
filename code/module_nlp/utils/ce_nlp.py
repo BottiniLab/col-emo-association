@@ -5,6 +5,9 @@ Author: Mattia Silvestri
 import pandas as pd
 import numpy as np
 import pickle
+from collections import OrderedDict
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 class Embeddings:
     """Class to handle word embeddings"""
@@ -199,3 +202,45 @@ def get_lowspace(model:Embeddings, neighbours: str, valence: list, arousal:
             difference_vectors[k] = (norm_diff, v_diff)
 
     return difference_vectors
+
+
+def compute_pca(embeddings, n_components=None):
+    """Compute the PCA
+    
+    The function just compute PCA using the parameters provided  in input.
+    It returns a dataframe with the new PC dimensinos
+    (words x dimensions), a 2-dimensional array containing only the PCs and
+    the fit parameters used for PCA.
+
+    Parameters
+    ----------
+    embeddings: dict, pd.DataFrame
+        Word embeddings taken from whatever vector model
+        (fasttext, word2vec, etc.)
+
+    n_components: int, optional
+        Number of components to extract.
+
+    """
+    if (type(embeddings) == dict):
+        # Convert word embeddings to data frame
+        embed_df = pd.DataFrame.from_dict(embeddings, orient='index')
+    else:
+        embed_df = embeddings.set_index('index')
+
+    # rows = list(embed_df.index.values)
+    labels = pd.DataFrame(embed_df.index)
+    labels.rename(columns = {0: 'Words'}, inplace=True)
+
+    # Standardize values for PCA
+    val = embed_df.values
+    normvec = StandardScaler().fit_transform(val) # z-score data
+
+    # Run PCA and decompose to n dimensions
+    pca = PCA(n_components=n_components, svd_solver='full')
+    pc_fit = pca.fit(normvec)
+    pc = pca.transform(normvec)
+    pc_df = pd.DataFrame(pc)
+    final_pc = pd.concat([labels, pc_df], axis=1)
+
+    return final_pc, pc_fit, pca

@@ -109,3 +109,18 @@ get_control_wheel:
   # Location of the neighbours used to compute the centroids
   neighbours: /data/nlp/neighbours/neighbours_control.pkl 
 
+#-----------------------------------------------------------------------------#
+# osgood.control_rdm()
+#-----------------------------------------------------------------------------#
+# Generate RDMs for the control conditions
+control_rdm:
+  # Path the .csv file with the coordinates of color and emotion words in the
+  # control spaces computed with debiaswe method
+  path2control: /data/nlp/coordinates/control_coords.csv
+  # Path to the glove model
+  model_path: *model_path
+  # List with the color and emotions words to use int he analysis
+  color_words: *color_words
+  emotion_words: *emotion_words
+  # Path to the folder where to save the control matrices
+  save_control: '/data/nlp/RDMs/'

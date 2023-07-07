@@ -156,3 +156,77 @@ def get_wheels(config):
     final.to_csv('..' + save_coords)
 
     return final
+
+
+def control_rdm(config: dict) -> None: 
+    '''Compute and save the RDMs for the control conditions:
+    
+    - fasttext
+    - fasttext2d
+    - controlspace
+    
+    '''
+    #--- Read config ---#
+
+    data = pd.read_feather('..' + config['model_path'])
+    control_coords = pd.read_csv('..' + config['path2control'])
+    color_words = config['color_words']
+    emotion_words = config['emotion_words']
+    save_control = config['save_control']
+
+    #---------------------#
+    
+    select_words = {'Colors': color_words,
+                    'Emotions': emotion_words}
+    
+    model = ce.Embeddings(data)
+
+    try:
+        model.model.drop('level_0', axis=1, inplace=True)
+    except:
+        pass
+
+    # Do PCA
+    fasttext_2d = ce.compute_pca(data)[0]
+    model_2d = ce.Embeddings(fasttext_2d.iloc[:,0:3])
+    for words in select_words:
+        # Compute rdm based on cosine distance in the original 300D space
+        embeddings = {k:model.get_vector(k) for k in select_words[words]}
+        rdm_fasttext = pairwise.cosine_distances(list(embeddings.values()))
+        rdm_fasttext_df =  pd.DataFrame(data=rdm_fasttext, index=select_words[words], columns=select_words[words])
+
+        # Compute RDM based on euclidean distance between words in the reduced fasttext space
+        embeddings_2d = {k:model_2d.get_vector(k) for k in select_words[words]}
+        rdm_fasttext2d = pairwise.euclidean_distances(list(embeddings_2d.values()))
+        rdm_fasttext2d_df = pd.DataFrame(data=rdm_fasttext2d, index=select_words[words], columns=select_words[words])
+
+        # Compute RDM based on euclidean distance in the control space
+        ## Select words
+        control_coords.set_index('index', inplace=True)
+        coords_geo = control_coords.loc[filter(lambda x : x in select_words[words],
+                                                   control_coords.index.values)]
+        control_coords.reset_index(inplace=True)
+        coords_geo.reset_index(inplace=True)
+        ## Order words
+        coords_geo['ordering'] = list(itertools.repeat(0, len(select_words[words])))
+        count = 0
+        for i in select_words[words]:
+            coords_geo['ordering'].loc[coords_geo['index'] == i] = \
+            count
+            count += 1
+        coords_geo.sort_values(by='ordering', axis=0, inplace=True)
+        coords_geo.drop('ordering', axis=1)
+        # TEST: mer 10 mag 2023, 15:47:17
+        # Test that the order is correct
+        assert list(coords_geo['index']) == select_words[words]
+        ## Compute controlspace RDM
+        rdm_control = pairwise.euclidean_distances(coords_geo[['Valence',
+                                                               'Arousal']].values)
+        rdm_control_df = pd.DataFrame(data=rdm_control, index=select_words[words],
+                                      columns=select_words[words])
+
+
+        # Save the matrices
+        rdm_fasttext_df.to_csv('..' + save_control + words + '_fasttext300.csv')
+        rdm_fasttext2d_df.to_csv('..' + save_control + words + '_fasttext2d.csv')
+        rdm_control_df.to_csv('..' + save_control + words + '_controlspace.csv')

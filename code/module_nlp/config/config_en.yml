@@ -74,6 +74,7 @@ define: &color_map
 #-----------------------------------------------------------------------------#
 # osgood.get_wheel()
 #-----------------------------------------------------------------------------#
+# Get coordinates of colors and emotionsin the Osgood dimensions
 get_wheel:
   # Path to the feather file containing the english wiki-news-300d-1M model
   # embeddings
@@ -88,3 +89,23 @@ get_wheel:
   save_coords: /data/nlp/coordinates/osgood_coords.csv
   # Location of the neighbours used to compute the centroids
   neighbours: /data/nlp/neighbours/neighbours_osgood.pkl 
+
+#-----------------------------------------------------------------------------#
+# osgood.get_wheel()
+#-----------------------------------------------------------------------------#
+# Get coordinates of colors and emotionsin the control dimensions
+get_control_wheel:
+  # Path to the feather file containing the english wiki-news-300d-1M model
+  # embeddings
+  model: *model_path
+  # Osgood representative words
+  valence: ['North', 'South']
+  arousal: ['East', 'West']
+  # List with the color words to use int he analysis
+  color_words: *color_words
+  emotion_words: *emotion_words
+  # Where to save the table with the coordinates
+  save_coords: /data/nlp/coordinates/control_coords.csv
+  # Location of the neighbours used to compute the centroids
+  neighbours: /data/nlp/neighbours/neighbours_control.pkl 
+

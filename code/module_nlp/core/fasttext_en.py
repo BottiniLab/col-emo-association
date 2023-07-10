@@ -230,3 +230,350 @@ def control_rdm(config: dict) -> None:
         rdm_fasttext_df.to_csv('..' + save_control + words + '_fasttext300.csv')
         rdm_fasttext2d_df.to_csv('..' + save_control + words + '_fasttext2d.csv')
         rdm_control_df.to_csv('..' + save_control + words + '_controlspace.csv')
+
+
+def osgood_rdm(config) -> None:
+    """Same analysis as the previous function but in the Osgood space"""
+
+    #--- Read config ---#
+
+    emotion_wheel = pd.read_csv('..' + config['path_em_wheel'])
+    color_wheel = pd.read_csv('..' + config['path_col_wheel'])
+    osgoodaxes_df = pd.read_csv('..' + config['path_centroids'])
+    path2control_rdm = config['path2control_rdm']
+    color_words = config['color_words']
+    emotion_words = config['emotion_words']
+    path_results = config['path_results']
+
+    #---------------------#
+
+    select_words = {'Colors': color_words,
+                    'Emotions': emotion_words}
+                               
+
+    def stat_test(osgoodaxes_df, rdm_human1, rdm_osgoodspace1, rdm_fasttext1,
+                  rdm_fasttext2d1, rdm_control1, select_figure = 'all'):
+
+        # Remove upper half diagonal
+        rdm_human = ce.del_upper(rdm_human1)
+        rdm_osgoodspace= ce.del_upper(rdm_osgoodspace1)
+        rdm_fasttext = ce.del_upper(rdm_fasttext1)
+        rdm_fasttext2d = ce.del_upper(rdm_fasttext2d1)
+        rdm_control = ce.del_upper(rdm_control1.values)
+
+        # Correlate the 3 RSM
+        statistic = lambda x,y : spearmanr(x,y).correlation
+
+        # Compute permutation test to test significance difference between the two
+        # correlations
+        corr_osgoodspace = spearmanr(rdm_human, rdm_osgoodspace)
+        corr_fasttext = spearmanr(rdm_human, rdm_fasttext)
+        corr_fasttext2d = spearmanr(rdm_human, rdm_fasttext2d)
+        corr_control = spearmanr(rdm_human,
+                                 rdm_control)
+
+        s = 10000
+        permute_osgoodspace = np.zeros(s)
+        permute_fasttext = np.zeros(s)
+        permute_fasttext2d = np.zeros(s)
+        permute_control = np.zeros(s)
+
+        for p in range(s):
+            np.random.seed(p)
+            human_sample = np.random.permutation(rdm_human)
+            permute_osgoodspace[p] = spearmanr(human_sample, 
+                                               np.random.permutation(rdm_osgoodspace))[0]
+            permute_fasttext[p] = spearmanr(human_sample, 
+                                               np.random.permutation(rdm_fasttext))[0]
+            permute_fasttext2d[p] = spearmanr(human_sample, 
+                                               np.random.permutation(rdm_fasttext2d))[0]
+            permute_control[p] = spearmanr(human_sample, 
+                                               np.random.permutation(rdm_control))[0]
+
+
+        # Get p-value
+        ## Fasttext
+        diff_null = permute_osgoodspace - \
+        permute_fasttext
+        diff_corr = corr_osgoodspace[0] - corr_fasttext[0]
+        diff_corr_z = statistics.NormalDist(mu = np.mean(diff_null),
+                              sigma=np.std(diff_null)).zscore(diff_corr)
+
+        p_val = stats.norm.sf(abs(diff_corr_z))*2
+
+        ## Fasttext2d
+        diff_null2d = permute_osgoodspace- \
+        permute_fasttext2d
+        diff_corr2d = corr_osgoodspace[0] - corr_fasttext2d[0]
+        diff_corr_z2d = statistics.NormalDist(mu = np.mean(diff_null2d),
+                              sigma=np.std(diff_null2d)).zscore(diff_corr2d)
+
+        p_val2d = stats.norm.sf(abs(diff_corr_z2d))*2
+
+        ## Control space
+        diff_nullcont = permute_osgoodspace- \
+        permute_control
+        diff_corrcont = corr_osgoodspace[0] - corr_control[0]
+        diff_corr_zcont = statistics.NormalDist(mu = np.mean(diff_nullcont),
+                              sigma=np.std(diff_nullcont)).zscore(diff_corrcont)
+
+        p_valcont = stats.norm.sf(abs(diff_corr_zcont))*2
+
+
+        corr_df = pd.DataFrame(data=[[corr_osgoodspace[0], corr_osgoodspace[1]],
+                                    [corr_fasttext[0], corr_fasttext[1]],
+                                    [corr_fasttext2d[0], corr_fasttext2d[1]],
+                                    [corr_control[0], corr_control[1]]],
+                                    index=['osgoodspace', 'fasttext',
+                                           'fasttext2d', 'controlspace'],
+                                    columns=['coefficient', 'p-value'])
+
+        diff_df = pd.DataFrame(data=[[p_val, diff_corr],
+                                     [p_val2d, diff_corr2d],
+                                     [p_valcont, diff_corrcont]], 
+                                     index=['fasttext', 'fasttext2d',
+                                            'controlsapce'], 
+                                     columns=['p_val', 'r_coef'])
+        #--- Plot the 4 RSM ---#
+        labels = osgoodaxes_df['index'].values
+        title_x = 0.5
+        width = 800
+        height = 800
+        font=dict(
+            size=15
+            )
+
+        fig1 = px.imshow(rdm_osgoodspace1,
+                    title='Osgood space',
+                    x=labels,
+                    y=labels,
+                    color_continuous_scale = 'RdBu',
+                    width = width,
+                    height = height
+                   ) 
+
+        fig1.update_xaxes(tickangle= 30)
+        fig1.update_layout(
+            title_x=title_x,
+            font=font
+            )
+
+        fig2 = px.imshow(rdm_fasttext1,
+                    title='Fasttext space',
+                    x=labels,
+                    y=labels,
+                    color_continuous_scale = 'RdBu',
+                    width = width,
+                    height = height
+                   ) 
+
+        fig2.update_xaxes(tickangle= 30)
+        fig2.update_layout(
+            title_x=title_x,
+            font=font
+            )
+
+        fig3 = px.imshow(rdm_fasttext2d1,
+                    title='Fasttext reduced space',
+                    x=labels,
+                    y=labels,
+                    color_continuous_scale = 'RdBu',
+                    width = width,
+                    height = height
+                   ) 
+
+        fig3.update_xaxes(tickangle= 30)
+        fig3.update_layout(
+            title_x=title_x,
+            font=font
+            )
+
+        fig4 = px.imshow(rdm_control1,
+                    title='Control space',
+                    x=labels,
+                    y=labels,
+                    color_continuous_scale = 'RdBu',
+                    width = width,
+                    height = height
+                   ) 
+
+        fig4.update_xaxes(tickangle= 30)
+        fig4.update_layout(
+            title_x=title_x,
+            font=font
+            )
+
+        fig5 = px.imshow(rdm_human1,
+                    title='Human ratings',
+                    x=labels,
+                    y=labels,
+                    color_continuous_scale = 'RdBu',
+                    width = width,
+                    height = height
+                   ) 
+
+        fig5.update_xaxes(tickangle= 30)
+        fig5.update_layout(
+            title_x=title_x,
+            font=font
+            )
+
+        figures = {'fig1': fig1, 
+                   'fig2': fig2, 
+                   'fig3': fig3,
+                   'fig4': fig4,
+                   'fig5': fig5,
+                   'plt': plt}
+
+        #--- Plot correlation scatterplot ---#
+        osgood_flatten = pd.DataFrame({"Human ratings": rdm_human.flatten(),
+                                       "Osgoodspace": rdm_osgoodspace.flatten()})
+        fasttext_flatten = pd.DataFrame({"Human ratings": rdm_human.flatten(),
+                                       "Fasttext": rdm_fasttext.flatten()})
+        fasttext2d_flatten = pd.DataFrame({"Human ratings": rdm_human.flatten(),
+                                       "Fasttext2D": rdm_fasttext2d.flatten()})
+        control_flatten = pd.DataFrame({"Human ratings": rdm_human.flatten(),
+                                       "Controlspace": rdm_control.flatten()})
+        
+        sns.set(font_scale=1.5)
+        sns.set_style("white")
+        sns.lmplot(x="Human ratings", y="Osgoodspace", data=osgood_flatten,
+                   height=7, aspect=1.2, robust=True, palette="tab10",
+                   scatter_kws=dict(s=60, linewidths=.7, edgecolors="black"))
+        plt.title("Human ratings ~ Osgoodspace")
+        plt.suptitle("r =  " + str(round(corr_osgoodspace[0], 3)), y=0.92)
+        plt.xlabel("Human ratings (euclidean distance)")
+        plt.ylabel("Osgood space (euclidean distance)")
+        plt.show()
+        sns.lmplot(x="Human ratings", y="Fasttext", data=fasttext_flatten,
+                   height=7, aspect=1.2, robust=True, palette="tab10",
+                   scatter_kws=dict(s=60, linewidths=.7, edgecolors="black"))
+        plt.title("Human ratings ~ Fasttext space" )
+        plt.suptitle("r =  " + str(round(corr_fasttext[0], 3)), y=0.92)
+        plt.xlabel("Human ratings (euclidean distance)")
+        plt.ylabel("Fasttext space (cosine distance)")
+        plt.show()
+        sns.lmplot(x="Human ratings", y="Fasttext2D", data=fasttext2d_flatten,
+                   height=7, aspect=1.2, robust=True, palette="tab10",
+                   scatter_kws=dict(s=60, linewidths=.7, edgecolors="black"))
+        plt.title("Human ratings ~ Fasttext 2D space")
+        plt.suptitle("r =  " + str(round(corr_fasttext2d[0], 3)), y=0.92)
+        plt.xlabel("Human ratings (euclidean distance)")
+        plt.ylabel("Fasttext 2D space (euclidean distance)")
+        plt.show()
+        sns.lmplot(x="Human ratings", y="Controlspace", data=control_flatten,
+                   height=7, aspect=1.2, robust=True, palette="tab10",
+                   scatter_kws=dict(s=60, linewidths=.7, edgecolors="black"))
+        plt.title("Human ratings ~ Control geographic space")
+        plt.suptitle("r =  " + str(round(corr_control[0], 3)), y=0.92)
+        plt.xlabel("Human ratings (euclidean distance)")
+        plt.ylabel("Control space (euclidean distance)")
+        plt.show()
+
+        fig1.show()
+        fig2.show()
+        fig3.show()
+        fig4.show()
+        fig5.show()
+
+        plt.hist(diff_null, bins=50)
+        plt.suptitle('Permuatation distribution of correlation differences - 300D')
+        plt.title('p-value: ' + str(round(p_val, 3)), fontdict={'fontsize': 11})
+        plt.axvline(x=diff_corr, ymax=0.7, color='red')
+        plt.show()
+
+        plt.hist(diff_null2d, bins=50)
+        plt.suptitle('Permuatation distribution of correlation differences - 2D')
+        plt.title('p-value: ' + str(round(p_val2d, 3)), fontdict={'fontsize': 11})
+        plt.axvline(x=diff_corr2d, ymax=0.7, color='red')
+        plt.show()
+
+        plt.hist(diff_nullcont, bins=50)
+        plt.suptitle('Permuatation distribution of correlation differences - Control')
+        plt.title('p-value: ' + str(round(p_valcont, 3)))
+        plt.axvline(x=diff_corrcont, ymax=0.7, color='red')
+        plt.show()
+
+        return diff_df, corr_df
+
+
+    for words in select_words:
+        osgoodaxes_df.set_index('index', inplace=True)
+        coords = osgoodaxes_df.loc[filter(lambda x : x in select_words[words],
+                                                   osgoodaxes_df.index.values)]
+        osgoodaxes_df.reset_index(inplace=True)
+        coords.reset_index(inplace=True)
+        # Make sure that words are ordered in the right way
+        coords['ordering'] = list(itertools.repeat(0, len(select_words[words])))
+        count = 0
+        for i in select_words[words]:
+            coords['ordering'].loc[coords['index'] == i] = count
+            count += 1
+        coords.sort_values(by='ordering', axis=0, inplace=True)
+        coords.drop(['Unnamed: 0', 'ordering'], axis=1)
+
+        # Compute Osgood space RSM
+        rdm_osgoodspace = pairwise.euclidean_distances(coords[['Valence',
+                                                                  'Arousal']].values)
+        # Test for normality
+        osgood_norm = ce.test_normality(ce.del_upper(rdm_osgoodspace), title='Osgood space')
+
+        if words == 'Colors':
+            # Compute human RDM
+            rdm_human = pairwise.euclidean_distances(color_wheel[['x', 'y']].values)
+            # Test for normality
+            human_norm = ce.test_normality(ce.del_upper(rdm_human), title='Human ratings')
+
+            # Load rdm based on cosine distance in the original 300D space
+            rdm_fasttext = pd.read_csv('..' + path2control_rdm + 'Colors_fasttext300.csv')
+            rdm_fasttext.set_index(rdm_fasttext.columns[0], inplace=True)
+            # Test for normality
+            fasttext_norm = ce.test_normality(ce.del_upper(rdm_fasttext.values), title='Fasttext 300D')
+
+            # Load fasttext2d RDM
+            rdm_fasttext2d = pd.read_csv('..' + path2control_rdm + 'Colors_fasttext2d.csv')
+            rdm_fasttext2d.set_index(rdm_fasttext2d.columns[0], inplace=True)
+            # Test for normality
+            fasttext2d_norm = ce.test_normality(ce.del_upper(rdm_fasttext2d.values), title='Fasttext 2D')
+
+            # Load controlspace RDM
+            rdm_control = pd.read_csv('..' + path2control_rdm + 'Colors_controlspace.csv')
+            rdm_control.set_index(rdm_control.columns[0], inplace=True)
+            # Test for normality
+            control_norm = ce.test_normality(ce.del_upper(rdm_control.values), title='Control space')
+
+            corr_method = 'spearman'
+            # Stats on color words
+            diff_col, corr_col = stat_test(coords, rdm_human, rdm_osgoodspace, rdm_fasttext.values, rdm_fasttext2d.values, 
+                rdm_control1=rdm_control)
+            corr_col.to_csv('..' + path_results + 'colors_spearman1.csv')
+            diff_col.to_csv('..' + path_results + 'colors_spearman2.csv')
+        else: 
+            # Compute human RDM
+            rdm_human = pairwise.euclidean_distances(emotion_wheel[['x', 'y']].values)
+            # Test for normality
+            human_norm = ce.test_normality(ce.del_upper(rdm_human), title='Human ratings')
+
+            # Load rdm based on cosine distance in the original 300D space
+            rdm_fasttext = pd.read_csv('..' + path2control_rdm + 'Emotions_fasttext300.csv')
+            rdm_fasttext.set_index(rdm_fasttext.columns[0], inplace=True)
+            # Test for normality
+            fasttext_norm = ce.test_normality(ce.del_upper(rdm_fasttext.values), title='Fasttext 300D')
+
+            # Load fasttext2d RDM
+            rdm_fasttext2d = pd.read_csv('..' + path2control_rdm + 'Emotions_fasttext2d.csv')
+            rdm_fasttext2d.set_index(rdm_fasttext2d.columns[0], inplace=True)
+            # Test for normality
+            fasttext2d_norm = ce.test_normality(ce.del_upper(rdm_fasttext2d.values), title='Fasttext 2D')
+
+            # Load controlspace RDM
+            rdm_control = pd.read_csv('..' + path2control_rdm + 'Emotions_controlspace.csv')
+            rdm_control.set_index(rdm_control.columns[0], inplace=True)
+            # Test for normality
+            control_norm = ce.test_normality(ce.del_upper(rdm_control.values), title='Control space')
+
+            corr_method = 'spearman'
+            diff_em, corr_em = stat_test(coords, rdm_human, rdm_osgoodspace, rdm_fasttext.values, rdm_fasttext2d.values, 
+                rdm_control1=rdm_control)
+            corr_em.to_csv('..' + path_results + 'emotions_spearman1.csv')
+            diff_em.to_csv('..' + path_results + 'emotions_spearman2.csv')

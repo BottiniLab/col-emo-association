@@ -20,6 +20,7 @@ from scipy import stats
 import webcolors
 from sklearn.metrics import pairwise
 import statistics
+import plotly.express as px
 
 # Add dependences
 from module_nlp.utils import ce_nlp as ce
@@ -252,7 +253,7 @@ def osgood_rdm(config) -> None:
                                
 
     def stat_test(osgoodaxes_df, rdm_human1, rdm_osgoodspace1, rdm_fasttext1,
-                  rdm_fasttext2d1, rdm_control1, select_figure = 'all'):
+                  rdm_fasttext2d1, rdm_control1):
 
         # Remove upper half diagonal
         rdm_human = ce.del_upper(rdm_human1)
@@ -417,13 +418,6 @@ def osgood_rdm(config) -> None:
             title_x=title_x,
             font=font
             )
-
-        figures = {'fig1': fig1, 
-                   'fig2': fig2, 
-                   'fig3': fig3,
-                   'fig4': fig4,
-                   'fig5': fig5,
-                   'plt': plt}
 
         #--- Plot correlation scatterplot ---#
         osgood_flatten = pd.DataFrame({"Human ratings": rdm_human.flatten(),

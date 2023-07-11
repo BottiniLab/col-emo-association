@@ -8,6 +8,8 @@ import pickle
 from collections import OrderedDict
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+from scipy import stats
+from matplotlib import pyplot as plt
 
 class Embeddings:
     """Class to handle word embeddings"""
@@ -244,3 +246,43 @@ def compute_pca(embeddings, n_components=None):
     final_pc = pd.concat([labels, pc_df], axis=1)
 
     return final_pc, pc_fit, pca
+
+
+def test_normality(matrix: np.ndarray, title: str = '') -> float:
+    '''Test for normality of the flattened matrix in input
+
+    Parameters
+    ----------
+    matrix: np.ndarray
+        Matrix of which to test the normal distribution
+    title: str
+        Title of the histogram
+
+    Return
+    ------
+    matrix_normal.pvalue: float
+        pvalue of the normality test
+
+    '''
+    matrix_normal = stats.normaltest(matrix)
+    plt.hist(matrix, bins=50)
+    plt.suptitle(title)
+    plt.title('p-value: ' + str(round(matrix_normal.pvalue, 3)))
+    plt.show()
+
+    return matrix_normal.pvalue
+
+
+def del_upper(array: np.ndarray) -> np.ndarray:
+    '''Delete upper triangle and returns a flattened array'''
+    np_lower = np.tril(array, k=-1)
+    idx = np.nonzero(np_lower.flatten())
+    final = np_lower.flatten()[idx]
+
+    # Sanity check on matrix length: 
+    # check that the length of the trimmed matrix equals the length of half
+    # matrix
+    no_diag = array[~np.eye(array.shape[0], dtype=bool)].reshape(array.shape[0], -1)
+    assert len(final) == len(no_diag.flatten()) / 2, f"{len(array)}"
+
+    return final

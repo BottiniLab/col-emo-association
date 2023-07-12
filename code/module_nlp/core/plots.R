@@ -142,7 +142,7 @@ rdm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
     scale_x_discrete(limits = factor(data$X)) +
     ylim(ylim[1], ylim[2]) +
     geom_bar(stat = "identity") +
-    scale_fill_manual(values = c("#89dceb","#74c7ec", "#89b4fa", "#b4befe"),
+    scale_fill_manual(values = c("#CBA6F7","#E6A0C4", "#C6CDF7", "#D8A499"),
      name = "rho-coefficients", limits = factor(round(data$coefficient, 3))) +
     geom_text(aes(y = coefficient + 0.02 * sign(coefficient), label = plabels), 
     size = 6) +

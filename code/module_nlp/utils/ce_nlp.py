@@ -268,7 +268,7 @@ def test_normality(matrix: np.ndarray, title: str = '') -> float:
     plt.hist(matrix, bins=50)
     plt.suptitle(title)
     plt.title('p-value: ' + str(round(matrix_normal.pvalue, 3)))
-    plt.show()
+    plt.close()
 
     return matrix_normal.pvalue
 

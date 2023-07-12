@@ -10,11 +10,11 @@ library("scales")
 options(warn = -1)
 
 # Create custom theme common to all plots
-ce_theme <- theme(
+scatter_theme <- theme(
   # Panel background color
   panel.background = element_rect(fill = "white"),
   # Axis label color
-  axis.text = element_text(color = "#151515", size = 10),
+  axis.text = element_text(color = "#151515", size = 18),
   # Legend settings
   legend.background = element_blank(),
   legend.key = element_blank(),
@@ -22,22 +22,42 @@ ce_theme <- theme(
   # legend.title = element_blank(),
   # Tick settings
   axis.ticks = element_line(color = "#151515"),
-  # Direction of ticks
   axis.ticks.length = unit(0.15, "cm"),  # Major tick size
   # Axis line
-  axis.line.x = element_line(color = "black", linewidth = 0.5),
-  axis.line.y = element_line(color = "black", linewidth = 0.5),
+  axis.line.x = element_line(color = "black", linewidth = 1),
+  axis.line.y = element_line(color = "black", linewidth = 1),
   # Font family
   text = element_text(family = "Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif", 
-                      size = 10, colour = "#151515"),
-  # Grid lines
-  panel.grid.major = element_line(color = "white"),
-  panel.grid.minor = element_line(color = "white"),
+                      size = 20, colour = "#151515"),
+)
+
+barplot_theme <- theme(
+  # Panel background color
+  panel.background = element_rect(fill = "white"),
+  # Axis label color
+  axis.text.y = element_text(color = "#151515", size = 18),
+  axis.text.x = element_text(angle = 30, color = "#151515", size = 18, vjust = 1,
+   hjust=1),
+  # Legend settings
+  legend.background = element_blank(),
+  legend.key = element_blank(),
+  legend.text = element_text(color = "#151515", size = 16),
+  legend.title = element_text(size = 16),
+  # legend.title = element_blank(),
+  # Tick settings
+  axis.ticks = element_line(color = "#151515"),
+  axis.ticks.length = unit(0.15, "cm"),  # Major tick size
+  # Axis line
+  axis.line.x = element_line(color = "black", linewidth = 1),
+  axis.line.y = element_line(color = "black", linewidth = 1),
+  # Font family
+  text = element_text(family = "Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif", 
+                      size = 20, colour = "#151515"),
 )
 
 # Plot figures 7A and 7B
 plot_osgood <- function(file_name, save_colors, save_emotions,
-                      xlab = 'Valence', ylab = 'Arousal', style = ce_theme) {
+                      xlab = 'Valence', ylab = 'Arousal', style = scatter_theme) {
   
   data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
   data$index <- toupper(data$index)
@@ -47,10 +67,9 @@ plot_osgood <- function(file_name, save_colors, save_emotions,
   scatter_color <- ggplot(colors, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
     geom_point(aes(size = 6, colour = "#CBA6F7"), show.legend = F) +
     scale_color_identity() +
-    geom_text(size = 0) +
     scale_x_continuous(name=xlab)+
     scale_y_continuous(name=ylab)+
-    geom_text_repel() +
+    geom_text_repel(size = 5) +
     style
   # scale_x_continuous(breaks = seq(min(colors$z_valence), max(colors$z_valence), by = 0.25)) +
   # scale_y_continuous(breaks = seq(min(colors$z_arousal), max(colors$z_arousal), by = 0.25))
@@ -61,10 +80,9 @@ plot_osgood <- function(file_name, save_colors, save_emotions,
   scatter_emotions <- ggplot(emotions, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
     geom_point(aes(size = 6, colour = "#CBA6F7"), show.legend = F) +
     scale_color_identity() +
-    geom_text(size = 0) +
     scale_x_continuous(name=xlab)+
     scale_y_continuous(name=ylab)+
-    geom_text_repel() +
+    geom_text_repel(size = 5) +
     style
   save_to <- paste0("../figures/", save_emotions)
   dir.create(file.path(dirname(save_to)))
@@ -73,7 +91,7 @@ plot_osgood <- function(file_name, save_colors, save_emotions,
 
 # Plot figure 7E 
 plot_both <- function(file_name, is_geo = F, save_both,
-                      xlab = 'Valence', ylab = 'Arousal', style = ce_theme) {
+                      xlab = 'Valence', ylab = 'Arousal', style = scatter_theme) {
 
   data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
   data$index <- toupper(data$index)
@@ -86,7 +104,7 @@ plot_both <- function(file_name, is_geo = F, save_both,
     geom_text(size = 0) +
     scale_x_continuous(name=xlab)+
     scale_y_continuous(name=ylab)+
-    geom_text_repel() +
+    geom_text_repel(size = 5) +
     style
   
   save_to <- paste0("../figures/", save_both)
@@ -96,7 +114,7 @@ plot_both <- function(file_name, is_geo = F, save_both,
 }
 
 rdm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
-                     plabels = c("", "", ""), style = ce_theme) {
+                     plabels = c("", "", ""), style = barplot_theme) {
   data <- read.csv(paste0("../data/nlp/correlations/", csv_name[1]))
   data2 <- read.csv(paste0("../data/nlp/correlations/", csv_name[2]))
   if (data2$p_val[1] < 0.001) {
@@ -124,26 +142,21 @@ rdm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
     scale_x_discrete(limits = factor(data$X)) +
     ylim(ylim[1], ylim[2]) +
     geom_bar(stat = "identity") +
-    scale_fill_manual(values = c("#CBA6F7","#E6A0C4", "#C6CDF7", "#D8A499", "#7294D4"), name = "rho-coefficients", limits = factor(round(data$coefficient, 3))) +
+    scale_fill_manual(values = c("#89dceb","#74c7ec", "#89b4fa", "#b4befe"),
+     name = "rho-coefficients", limits = factor(round(data$coefficient, 3))) +
     geom_text(aes(y = coefficient + 0.02 * sign(coefficient), label = plabels), 
-    size = 7) +
+    size = 6) +
     geom_signif(comparisons = list(c("fasttext", data$X[1])),
-                annotations = pval_ft,
+                annotations = pval_ft, textsize = 4,
                 y_position = y_position, tip_length = 0, vjust = -0.5) +
     geom_signif(comparisons = list(c("fasttext2d", data$X[1])),
-                annotations = pval_ft2d,
+                annotations = pval_ft2d, textsize = 4,
                 y_position = y_position + 0.07, tip_length = 0, vjust = -0.5) +
     geom_signif(comparisons = list(c("controlspace", data$X[1])),
-                annotations = pval_control,
+                annotations = pval_control, textsize = 4,
                 y_position = y_position + 0.14, tip_length = 0, vjust = -0.5) +
     xlab("Condition") + ylab("Coefficients") +
     style
-    # theme(
-    #   plot.title = element_text(size = 14, hjust = 0.5),
-    #   axis.title.x = element_text(size = 12),
-    #   axis.title.y = element_text(size = 12),
-    #   axis.text.x = element_text(size = 12)
-    #   ) 
   
   save_to <- paste0("../figures/", file_name) 
   dir.create(file.path(dirname(save_to)))

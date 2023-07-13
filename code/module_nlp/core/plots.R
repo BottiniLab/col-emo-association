@@ -27,7 +27,7 @@ scatter_theme <- theme(
   axis.line.x = element_line(color = "black", linewidth = 1.2),
   axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
-  text = element_text(family = "Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif", 
+  text = element_text(family = "sans-serif", 
                       size = 20, colour = "#151515"),
 )
 
@@ -51,7 +51,7 @@ barplot_theme <- theme(
   axis.line.x = element_line(color = "black", linewidth = 1.2),
   axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
-  text = element_text(family = "Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif", 
+  text = element_text(family = "sans-serif", 
                       size = 20, colour = "#151515"),
 )
 

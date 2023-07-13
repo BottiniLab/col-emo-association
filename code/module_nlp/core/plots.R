@@ -27,8 +27,7 @@ scatter_theme <- theme(
   axis.line.x = element_line(color = "black", linewidth = 1.2),
   axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
-  text = element_text(family = "sans-serif", 
-                      size = 20, colour = "#151515"),
+  text = element_text(family = "Helvetica", size = 20, colour = "#151515"),
 )
 
 barplot_theme <- theme(
@@ -51,8 +50,7 @@ barplot_theme <- theme(
   axis.line.x = element_line(color = "black", linewidth = 1.2),
   axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
-  text = element_text(family = "sans-serif", 
-                      size = 20, colour = "#151515"),
+  text = element_text(family = "Helvetica", size = 20, colour = "#151515"),
 )
 
 # Plot figures 7A and 7B
@@ -65,7 +63,7 @@ plot_osgood <- function(file_name, save_colors, save_emotions,
   emotions <- data[data$Condition == "Emotion", ]
   
   scatter_color <- ggplot(colors, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
-    geom_point(aes(size = 6, colour = "#CBA6F7"), show.legend = F) +
+    geom_point(aes(size = 6, colour = "#89b4fa"), show.legend = F) +
     scale_color_identity() +
     scale_x_continuous(name=xlab)+
     scale_y_continuous(name=ylab)+
@@ -78,7 +76,7 @@ plot_osgood <- function(file_name, save_colors, save_emotions,
   ggsave(save_to, plot=scatter_color, width = 6, height = 6)
   
   scatter_emotions <- ggplot(emotions, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
-    geom_point(aes(size = 6, colour = "#CBA6F7"), show.legend = F) +
+    geom_point(aes(size = 6, colour = "#89b4fa"), show.legend = F) +
     scale_color_identity() +
     scale_x_continuous(name=xlab)+
     scale_y_continuous(name=ylab)+
@@ -142,7 +140,7 @@ rdm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
     scale_x_discrete(limits = factor(data$X)) +
     ylim(ylim[1], ylim[2]) +
     geom_bar(stat = "identity") +
-    scale_fill_manual(values = c("#CBA6F7","#E6A0C4", "#C6CDF7", "#D8A499"),
+    scale_fill_manual(values = c("#89dceb","#74c7ec", "#89b4fa", "#b4befe"),
      name = "rho-coefficients", limits = factor(round(data$coefficient, 3))) +
     geom_text(aes(y = coefficient + 0.02 * sign(coefficient), label = plabels), 
     size = 6) +

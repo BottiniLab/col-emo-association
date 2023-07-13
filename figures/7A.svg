@@ -49,22 +49,22 @@
 <circle cx='241.88' cy='352.68' r='5.19' style='stroke-width: 0.71; stroke: #CBA6F7; fill: #CBA6F7;' />
 <circle cx='139.78' cy='364.01' r='5.19' style='stroke-width: 0.71; stroke: #CBA6F7; fill: #CBA6F7;' />
 <circle cx='155.19' cy='157.11' r='5.19' style='stroke-width: 0.71; stroke: #CBA6F7; fill: #CBA6F7;' />
-<text x='381.93' y='254.39' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='45.81px' lengthAdjust='spacingAndGlyphs'>GREEN</text>
-<text x='195.32' y='37.45' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='58.10px' lengthAdjust='spacingAndGlyphs'>ORANGE</text>
-<text x='99.09' y='164.11' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='55.19px' lengthAdjust='spacingAndGlyphs'>YELLOW</text>
-<text x='251.71' y='347.96' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='35.00px' lengthAdjust='spacingAndGlyphs'>BLUE</text>
-<text x='149.56' y='359.34' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='51.80px' lengthAdjust='spacingAndGlyphs'>PURPLE</text>
-<text x='164.99' y='152.41' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='27.13px' lengthAdjust='spacingAndGlyphs'>RED</text>
+<text x='381.97' y='254.46' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='45.81px' lengthAdjust='spacingAndGlyphs'>GREEN</text>
+<text x='195.28' y='37.41' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='58.10px' lengthAdjust='spacingAndGlyphs'>ORANGE</text>
+<text x='99.02' y='164.18' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='55.19px' lengthAdjust='spacingAndGlyphs'>YELLOW</text>
+<text x='232.11' y='367.49' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='35.00px' lengthAdjust='spacingAndGlyphs'>BLUE</text>
+<text x='149.56' y='359.33' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='51.80px' lengthAdjust='spacingAndGlyphs'>PURPLE</text>
+<text x='165.00' y='152.44' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='27.13px' lengthAdjust='spacingAndGlyphs'>RED</text>
 </g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHw0MzIuMDA=)'>
-<polyline points='49.84,381.08 49.84,5.48 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
+<polyline points='49.84,381.08 49.84,5.48 ' style='stroke-width: 2.56; stroke-linecap: butt;' />
 <text x='43.40' y='343.49' text-anchor='end' style='font-size: 18.00px;fill: #151515; font-family: "Noto Sans";' textLength='16.09px' lengthAdjust='spacingAndGlyphs'>-1</text>
 <text x='43.40' y='223.90' text-anchor='end' style='font-size: 18.00px;fill: #151515; font-family: "Noto Sans";' textLength='10.30px' lengthAdjust='spacingAndGlyphs'>0</text>
 <text x='43.40' y='104.30' text-anchor='end' style='font-size: 18.00px;fill: #151515; font-family: "Noto Sans";' textLength='10.30px' lengthAdjust='spacingAndGlyphs'>1</text>
 <polyline points='45.59,337.07 49.84,337.07 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
 <polyline points='45.59,217.47 49.84,217.47 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
 <polyline points='45.59,97.88 49.84,97.88 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
-<polyline points='49.84,381.08 426.52,381.08 ' style='stroke-width: 2.13; stroke-linecap: butt;' />
+<polyline points='49.84,381.08 426.52,381.08 ' style='stroke-width: 2.56; stroke-linecap: butt;' />
 <polyline points='95.89,385.33 95.89,381.08 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
 <polyline points='203.05,385.33 203.05,381.08 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />
 <polyline points='310.22,385.33 310.22,381.08 ' style='stroke-width: 1.07; stroke: #151515; stroke-linecap: butt;' />

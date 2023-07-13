@@ -24,8 +24,8 @@ scatter_theme <- theme(
   axis.ticks = element_line(color = "#151515"),
   axis.ticks.length = unit(0.15, "cm"),  # Major tick size
   # Axis line
-  axis.line.x = element_line(color = "black", linewidth = 1),
-  axis.line.y = element_line(color = "black", linewidth = 1),
+  axis.line.x = element_line(color = "black", linewidth = 1.2),
+  axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
   text = element_text(family = "Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif", 
                       size = 20, colour = "#151515"),
@@ -36,20 +36,20 @@ barplot_theme <- theme(
   panel.background = element_rect(fill = "white"),
   # Axis label color
   axis.text.y = element_text(color = "#151515", size = 18),
-  axis.text.x = element_text(angle = 30, color = "#151515", size = 18, vjust = 1,
+  axis.text.x = element_text(angle = 30, color = "#151515", size = 15, vjust = 1,
    hjust=1),
   # Legend settings
   legend.background = element_blank(),
   legend.key = element_blank(),
-  legend.text = element_text(color = "#151515", size = 16),
-  legend.title = element_text(size = 16),
+  legend.text = element_text(color = "#151515", size = 15),
+  legend.title = element_text(size = 15),
   # legend.title = element_blank(),
   # Tick settings
   axis.ticks = element_line(color = "#151515"),
   axis.ticks.length = unit(0.15, "cm"),  # Major tick size
   # Axis line
-  axis.line.x = element_line(color = "black", linewidth = 1),
-  axis.line.y = element_line(color = "black", linewidth = 1),
+  axis.line.x = element_line(color = "black", linewidth = 1.2),
+  axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
   text = element_text(family = "Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif", 
                       size = 20, colour = "#151515"),

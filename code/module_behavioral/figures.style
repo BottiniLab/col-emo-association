@@ -13,16 +13,15 @@ ytick.direction: out
 xtick.color: .15
 ytick.color: .15
 axes.axisbelow: True
-font.family: sans-serif
 grid.linestyle: -
 lines.solid_capstyle: round
-lines.markersize: 10
-axes.prop_cycle: cycler('color',   ['CBA6F7','E6A0C4', 'C6CDF7', 'D8A499', '7294D4'])
+lines.markersize: 12
+axes.prop_cycle: cycler('color',   ['89B4FA','E6A0C4', 'C6CDF7', 'D8A499', '7294D4'])
 
 axes.grid: True
 axes.facecolor: white
 axes.edgecolor: black
-axes.linewidth: 1
+axes.linewidth: 2
 grid.color: white
 xtick.major.size: 5
 ytick.major.size: 5
@@ -30,8 +29,12 @@ xtick.minor.size: 5
 ytick.minor.size: 5
 axes.spines.top: False
 axes.spines.right: False
+xtick.labelsize: 16
+ytick.labelsize: 16
+axes.labelsize: 16
 
 
 # Custom
-font.sans-serif: Gotham, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
+font.family: sans-serif
+font.sans-serif: Helvetica, Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
 image.cmap: RdPu

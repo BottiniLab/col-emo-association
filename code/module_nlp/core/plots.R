@@ -27,7 +27,7 @@ scatter_theme <- theme(
   axis.line.x = element_line(color = "black", linewidth = 1.2),
   axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
-  text = element_text(family = "Helvetica", size = 20, colour = "#151515"),
+  text = element_text(family = "sans-serif", size = 20, colour = "#151515"),
 )
 
 barplot_theme <- theme(
@@ -50,30 +50,40 @@ barplot_theme <- theme(
   axis.line.x = element_line(color = "black", linewidth = 1.2),
   axis.line.y = element_line(color = "black", linewidth = 1.2),
   # Font family
-  text = element_text(family = "Helvetica", size = 20, colour = "#151515"),
+  text = element_text(family = "sans-serif", size = 20, colour = "#151515"),
 )
 
-# Plot figures 7A and 7B
-plot_osgood <- function(file_name, save_colors, save_emotions,
+# Plot figure 7A 
+
+plot_colors <- function(file_name, save_colors,
                       xlab = 'Valence', ylab = 'Arousal', style = scatter_theme) {
   
   data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
   data$index <- toupper(data$index)
   colors <- data[data$Condition == "Color", ]
-  emotions <- data[data$Condition == "Emotion", ]
+  fill_color <- c(rgb(0, 255, 0, maxColorValue = 255), rgb(255, 128, 0, maxColorValue = 255),
+                  rgb(255, 255, 0, maxColorValue = 255), rgb(0, 0, 255, maxColorValue = 255),
+                  rgb(128, 0, 255, maxColorValue = 255), rgb(255, 0, 0, maxColorValue = 255))
+  cols <- as.character(fill_color)
+  names(cols) <- as.character(colors$index)
   
-  scatter_color <- ggplot(colors, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
-    geom_point(aes(size = 6, colour = "#89b4fa"), show.legend = F) +
+  scatter_color <- ggplot(colors, mapping = aes(x = z_valence, y = z_arousal)) +
+    geom_point(aes(size = 6, colour = cols), show.legend = F) +
     scale_color_identity() +
     scale_x_continuous(name=xlab)+
     scale_y_continuous(name=ylab)+
-    geom_text_repel(size = 5) +
     style
-  # scale_x_continuous(breaks = seq(min(colors$z_valence), max(colors$z_valence), by = 0.25)) +
-  # scale_y_continuous(breaks = seq(min(colors$z_arousal), max(colors$z_arousal), by = 0.25))
   save_to <- paste0("../figures/", save_colors)
   dir.create(file.path(dirname(save_to)))
   ggsave(save_to, plot=scatter_color, width = 6, height = 6)
+}
+
+plot_emotions <- function(file_name, save_colors, save_emotions,
+                      xlab = 'Valence', ylab = 'Arousal', style = scatter_theme) {
+  
+  data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
+  data$index <- toupper(data$index)
+  emotions <- data[data$Condition == "Emotion", ]
   
   scatter_emotions <- ggplot(emotions, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
     geom_point(aes(size = 6, colour = "#89b4fa"), show.legend = F) +
@@ -165,8 +175,9 @@ rdm_corr <- function(csv_name, title, file_name, y_position = 0.55, ylim = 0.65,
 args = commandArgs(trailingOnly = TRUE)
 
 switch (args,
-  "plot_osgood" = plot_osgood(file_name = "osgood_coords.csv",
-                          save_colors = "7A.svg",
+  "plot_colors" = plot_colors(file_name = "osgood_coords.csv",
+                          save_colors = "7A.svg"),
+  "plot_emotions" = plot_emotions(file_name = "osgood_coords.csv",
                           save_emotions = "7B.svg"),
   "plot_both" = plot_both(file_name = "osgood_coords.csv",
                           save_both = "7E.svg"),

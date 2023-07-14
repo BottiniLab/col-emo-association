@@ -43,18 +43,12 @@
 <polyline points='203.05,381.08 203.05,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='310.22,381.08 310.22,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='417.38,381.08 417.38,5.48 ' style='stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt;' />
-<circle cx='409.40' cy='249.38' r='5.19' style='stroke-width: 0.71; stroke: #89B4FA; fill: #89B4FA;' />
-<circle cx='205.10' cy='22.55' r='5.19' style='stroke-width: 0.71; stroke: #89B4FA; fill: #89B4FA;' />
-<circle cx='66.96' cy='159.10' r='5.19' style='stroke-width: 0.71; stroke: #89B4FA; fill: #89B4FA;' />
-<circle cx='241.88' cy='352.68' r='5.19' style='stroke-width: 0.71; stroke: #89B4FA; fill: #89B4FA;' />
-<circle cx='139.78' cy='364.01' r='5.19' style='stroke-width: 0.71; stroke: #89B4FA; fill: #89B4FA;' />
-<circle cx='155.19' cy='157.11' r='5.19' style='stroke-width: 0.71; stroke: #89B4FA; fill: #89B4FA;' />
-<text x='382.01' y='254.47' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='45.81px' lengthAdjust='spacingAndGlyphs'>GREEN</text>
-<text x='195.37' y='37.34' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='58.10px' lengthAdjust='spacingAndGlyphs'>ORANGE</text>
-<text x='99.00' y='159.72' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='55.19px' lengthAdjust='spacingAndGlyphs'>YELLOW</text>
-<text x='232.13' y='367.52' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='35.00px' lengthAdjust='spacingAndGlyphs'>BLUE</text>
-<text x='149.48' y='359.38' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='51.80px' lengthAdjust='spacingAndGlyphs'>PURPLE</text>
-<text x='147.71' y='172.01' text-anchor='middle' style='font-size: 14.23px; font-family: "Liberation Sans";' textLength='27.13px' lengthAdjust='spacingAndGlyphs'>RED</text>
+<circle cx='409.40' cy='249.38' r='5.19' style='stroke-width: 0.71; stroke: #00FF00; fill: #00FF00;' />
+<circle cx='205.10' cy='22.55' r='5.19' style='stroke-width: 0.71; stroke: #FF8000; fill: #FF8000;' />
+<circle cx='66.96' cy='159.10' r='5.19' style='stroke-width: 0.71; stroke: #FFFF00; fill: #FFFF00;' />
+<circle cx='241.88' cy='352.68' r='5.19' style='stroke-width: 0.71; stroke: #0000FF; fill: #0000FF;' />
+<circle cx='139.78' cy='364.01' r='5.19' style='stroke-width: 0.71; stroke: #8000FF; fill: #8000FF;' />
+<circle cx='155.19' cy='157.11' r='5.19' style='stroke-width: 0.71; stroke: #FF0000; fill: #FF0000;' />
 </g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MC4wMHw0MzIuMDA=)'>
 <polyline points='49.84,381.08 49.84,5.48 ' style='stroke-width: 2.56; stroke-linecap: butt;' />

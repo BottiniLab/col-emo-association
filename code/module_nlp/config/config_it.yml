@@ -5,30 +5,14 @@
 # GLOBALS #
 #---------#
 
-# Path to the feather file containing the english wiki-news-300d-1M model
-# embeddings
-define: &model_path '/data/nlp/models/wiki-news.feather'
 # Path to the feather file containing the Italian common crowl + wiki model
 # embeddings
-define: &it_model /Data/Large_files/cc.it.300.feather
+define: &model_path /data/nlp/models/cc.it.300.feather
 # Path to the original human generated colour and emotion wheel coordinates
 define: &path_col_wheel '/data/nlp/wheels/colorwheel_coords.csv'
 define: &path_em_wheel '/data/nlp/wheels/emotionwheel_coords.csv'
-# Path to the coordinates of the wheels generate by the osgood dimensions using
-# Marelli analysis and representative words
-define: &path_centroids '/Data/Osgood/centroids_cleaned.csv'
-# Path to the json file with the color and emotion word embeddings
-define: &ce_embeddings '/Data/words.json'
 # Path to the csv file holding the coordinates of colors and emotions in the control space
 define: &path2control  '/Data/Osgood/Coordinates/centroids_control.csv'
-# List with the color words to use int he analysis
-define: &color_words ['green', 'orange', 'yellow', 'blue', 'purple', 'red']
-# List with the emotion words to use in the analysis
-define: &emotion_words ['surprised', 'excited', 'serene', 'happy', 'satisfied',
-'calm', 'tired', 'bored', 'depressed', 'sad', 'frustrated', 'afraid', 'angry',
-'stressed', 'astonished', 'sleepy', 'alarmed', 'disgusted']
-# Path to the folder with the control RDMs
-define: &path2control_rdm '/Data/Osgood/RDM/Control/'
 # Osgood representative words:
 define: &valence [good, bad]
 define: &arousal [arousing, dull]
@@ -69,6 +53,26 @@ define: &color_map
   blue: blu
   purple: viola
   red: rosso
+
+
+#-----------------------------------------------------------------------------#
+# osgood.get_wheel()
+#-----------------------------------------------------------------------------#
+# Get coordinates of colors and emotionsin the Osgood dimensions
+get_wheel:
+  # Path to the feather file containing the english wiki-news-300d-1M model
+  # embeddings
+  model: *model_path
+  # Osgood representative words
+  valence: *valence
+  arousal: *arousal
+  # List with the color words to use int he analysis
+  color_words: *color_map
+  emotion_words: *emotion_map
+  # Where to save the table with the coordinates
+  save_coords: /data/nlp/coordinates/osgood_coords_it.csv
+  # Location of the nemotion_wordseighbours used to compute the centroids
+  neighbours: /data/nlp/neighbours/neighbours_osgood_it.pkl 
 
 
 

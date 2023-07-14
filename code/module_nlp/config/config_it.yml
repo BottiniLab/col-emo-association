@@ -27,32 +27,10 @@ define: &raw_emotions_blind /Data/Color_words/participantsColorTestingItalianBli
 define: &raw_colors_blind /Data/Color_words/participantsEmotionTestingItalianBlind.npy
 define: &raw_associate_blind /Data/Color_words/participantsEmotionColorAssociationTestingItalianBlind.npy
 # Mapping between english and italian color and emotion words
-define: &emotion_map
-  surprised: sorpreso
-  excited: entusiasta
-  serene: sereno
-  happy: allegro
-  satisfied: soddisfatto
-  calm: calmo
-  tired: stanco
-  bored: annoiato
-  depressed: depresso
-  sad: triste
-  frustrated: frustrato
-  afraid: spaventato
-  angry: arrabbiato
-  stressed: stressato
-  astonished: stupito
-  sleepy: assonnato
-  alarmed: allarmato
-  disgusted: disgustato
-define: &color_map
-  green: verde
-  orange: arancione
-  yellow: giallo
-  blue: blu
-  purple: viola
-  red: rosso
+define: &emotion_words [sorpreso, entusiasta, sereno, allegro, soddisfatto,
+  calmo, stanco, annoiato, depresso, triste, frustrato, spaventato, arrabbiato,
+  stressato, stupito, assonnato, allarmato, disgustato]
+define: &color_words [verde, arancione, giallo, blu, viola, rosso]
 
 
 #-----------------------------------------------------------------------------#
@@ -67,11 +45,11 @@ get_wheel:
   valence: *valence
   arousal: *arousal
   # List with the color words to use int he analysis
-  color_words: *color_map
-  emotion_words: *emotion_map
+  color_words: *color_words
+  emotion_words: *emotion_words
   # Where to save the table with the coordinates
   save_coords: /data/nlp/coordinates/osgood_coords_it.csv
-  # Location of the nemotion_wordseighbours used to compute the centroids
+  # Location of the neighbours used to compute the centroids
   neighbours: /data/nlp/neighbours/neighbours_osgood_it.pkl 
 
 

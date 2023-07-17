@@ -14,13 +14,8 @@ define: &path_em_wheel '/data/nlp/wheels/emotionwheel_coords.csv'
 # Path to the csv file holding the coordinates of colors and emotions in the control space
 define: &path2control  '/Data/Osgood/Coordinates/centroids_control.csv'
 # Osgood representative words:
-define: &valence [good, bad]
-define: &arousal [arousing, dull]
-define: &dominance [win, uncontrollable]
-# Osgood Representative words for the italian version
-define: &it_valence [positivo, negativo]
-define: &it_arousal [attivo, tranquillo]
-define: &it_dominance [vincere, passivo]
+define: &valence [positivo, negativo]
+define: &arousal [attivo, tranquillo]
 # Path to the raw single subjects similarity matrices (.npy file) of the blind
 # participants
 define: &raw_emotions_blind /Data/Color_words/participantsColorTestingItalianBlind.npy

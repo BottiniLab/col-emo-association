@@ -47,6 +47,7 @@ def get_wheels(config):
     valence_dict = config['valence']
     arousal_dict = config['arousal']
     color_words = config['color_words']
+    emotion_words = config['emotion_words']
     save_coords = config['save_coords']
     neighbours = config['neighbours']
 
@@ -61,8 +62,7 @@ def get_wheels(config):
 
     # Extract coloremotion words
     select_words = {'Colors': color_words,
-                    'Emotions': ['surprised', 'excited', 'serene', 'happy', 'satisfied', 'calm', 'tired', 'bored', 'depressed', 'sad',
-                                 'frustrated', 'afraid', 'angry', 'stressed', 'astonished', 'sleepy', 'alarmed', 'disgusted']}
+                    'Emotions': emotion_words}
 
     dimensions = ce.get_lowspace(model, neighbours, valence_dict, arousal_dict) 
 

@@ -108,8 +108,9 @@ def get_wheels(config):
                                                     'z_arousal']].values.astype('float'), 
                                          metric='euclidean')
 
-    distances = pd.DataFrame(1 / ce_distance, index=select_words['Emotions'], columns=select_words['Colors'])
-    hex_colors = {'green': np.array([0,128,0]),
+    en_colors = ["green", "orange", "yellow", "blue", "purple", "red"]
+    distances = pd.DataFrame(1 / ce_distance, index=select_words['Emotions'], columns=en_colors)
+    rgb_colors = {'green': np.array([0,128,0]),
                 'orange': np.array([255,165,0]),
                 'yellow': np.array([255,255,0]),
                 'blue': np.array([0,0,255]),
@@ -121,10 +122,10 @@ def get_wheels(config):
 
     n_colors = len(select_words['Colors'])
     for i in distances.index:
-        sorted_row = distances[list(hex_colors.keys())].sort_values(i, axis
+        sorted_row = distances[list(rgb_colors.keys())].sort_values(i, axis
                                 = 1, ascending = False).loc[[i]]
         close_colors = sorted_row.columns.values[0:2]
-        hex_np = np.array([hex_colors.get(k) for k in close_colors])
+        hex_np = np.array([rgb_colors.get(k) for k in close_colors])
         temp = np.empty((2,3))
         count = 0
         for j in close_colors:
@@ -151,7 +152,7 @@ def get_wheels(config):
     final['fill_color'] = list(itertools.repeat(0, len(final.index)))
     for i in range(len(final.index)):
         if final.iloc[i]['Condition'] == 'Color':
-            final['fill_color'][i] = final.iloc[i]['index']
+            final['fill_color'][i] = en_colors[i]
         else:
             final['fill_color'][i] = distances['hex_codes'].iloc[i-n_colors]
 

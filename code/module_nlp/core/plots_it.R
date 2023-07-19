@@ -82,10 +82,13 @@ plot_emotions <- function(file_name, save_colors, save_emotions,
                       xlab = 'Valence', ylab = 'Arousal', style = scatter_theme) {
   
   data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
-  data$index <- toupper(data$index)
   emotions <- data[data$Condition == "Emotion", ]
+  labels <- c('SURPRISED', 'EXCITED', 'SERENE', 'HAPPY', 'SATISFIED',
+  'CALM', 'TIRED', 'BORED', 'DEPRESSED', 'SAD', 'FRUSTRATED', 'AFRAID', 'ANGRY',
+  'STRESSED', 'ASTONISHED', 'SLEEPY', 'ALARMED', 'DISGUSTED')
+
   
-  scatter_emotions <- ggplot(emotions, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
+  scatter_emotions <- ggplot(emotions, mapping = aes(x = z_valence, y = z_arousal, label = labels)) +
     geom_point(aes(size = 6, colour = "#89b4fa"), show.legend = F) +
     scale_color_identity() +
     scale_x_continuous(name=xlab)+
@@ -178,7 +181,7 @@ switch (args,
   "plot_colors" = plot_colors(file_name = "osgood_coords_it.csv",
                           save_colors = "supp1A.svg"),
   "plot_emotions" = plot_emotions(file_name = "osgood_coords_it.csv",
-                          save_emotions = "supp7B.svg"),
+                          save_emotions = "supp1B.svg"),
   "plot_both" = plot_both(file_name = "osgood_coords_it.csv",
                           save_both = "supp7E.svg"),
   "rdm_osgood_col" = rdm_corr(c("colors_spearman1.csv",

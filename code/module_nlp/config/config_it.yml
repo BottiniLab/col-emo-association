@@ -9,8 +9,8 @@
 # embeddings
 define: &model_path /data/nlp/models/cc.it.300.feather
 # Path to the original human generated colour and emotion wheel coordinates
-define: &path_col_wheel '/data/nlp/wheels/colorwheel_coords.csv'
-define: &path_em_wheel '/data/nlp/wheels/emotionwheel_coords.csv'
+define: &path_col_wheel '/data/nlp/wheels/it/sighted/colorwheel_coords.csv'
+define: &path_em_wheel '/data/nlp/wheels/it/sighted/emotionwheel_coords.csv'
 # Path to the csv file holding the coordinates of colors and emotions in the control space
 define: &path2control  '/Data/Osgood/Coordinates/centroids_control.csv'
 # Osgood representative words:
@@ -47,7 +47,6 @@ get_wheel:
   # Location of the neighbours used to compute the centroids
   neighbours: /data/nlp/neighbours/neighbours_osgood_it.pkl 
 
-
 #-----------------------------------------------------------------------------#
 # osgood.get_wheel()
 #-----------------------------------------------------------------------------#
@@ -66,3 +65,37 @@ get_control_wheel:
   save_coords: /data/nlp/coordinates/control_coords_it.csv
   # Location of the neighbours used to compute the centroids
   neighbours: /data/nlp/neighbours/neighbours_control_it.pkl 
+    
+#-----------------------------------------------------------------------------#
+# osgood.control_rdm()
+#-----------------------------------------------------------------------------#
+# Generate RDMs for the control conditions
+control_rdm:
+  # Path the .csv file with the coordinates of color and emotion words in the
+  # control spaces computed with debiaswe method
+  path2control: /data/nlp/coordinates/control_coords_it.csv
+  # Path to the glove model
+  model_path: *model_path
+  # List with the color and emotions words to use int he analysis
+  color_words: *color_words
+  emotion_words: *emotion_words
+  # Path to the folder where to save the control matrices
+  save_control: '/data/nlp/RDMs/it/'
+
+#-----------------------------------------------------------------------------#
+# osgood.osgood_rdm()                                                          #
+#-----------------------------------------------------------------------------#
+rdm_difference:
+  # Path to the human generated emotion wheel
+  path_em_wheel: *path_em_wheel
+  # Path to the human generated colour wheel
+  path_col_wheel: *path_col_wheel
+  # Path to the folder with the control RDMs
+  path2control_rdm: /data/nlp/RDMs/it/
+  # List with the color words to use int he analysis
+  color_words: *color_words
+  emotion_words: *emotion_words
+  # Path to the coordinates in osgoodspace of colors and emotions
+  path_centroids: '/data/nlp/coordinates/osgood_coords_it.csv'
+  # Where to save the tables with correlations and p-values (folder)
+  path_results: /data/nlp/correlations/it/sighted/

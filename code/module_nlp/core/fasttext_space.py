@@ -228,8 +228,10 @@ def control_rdm(config: dict) -> None:
         rdm_control_df = pd.DataFrame(data=rdm_control, index=select_words[words],
                                       columns=select_words[words])
 
-
         # Save the matrices
+        if not os.path.exists('..' + save_control):
+            os.makedirs('..' + save_control)
+
         rdm_fasttext_df.to_csv('..' + save_control + words + '_fasttext300.csv')
         rdm_fasttext2d_df.to_csv('..' + save_control + words + '_fasttext2d.csv')
         rdm_control_df.to_csv('..' + save_control + words + '_controlspace.csv')
@@ -249,6 +251,9 @@ def osgood_rdm(config) -> None:
     path_results = config['path_results']
 
     #---------------------#
+
+    if not os.path.exists('..' + path_results):
+        os.makedirs('..' + path_results)
 
     select_words = {'Colors': color_words,
                     'Emotions': emotion_words}

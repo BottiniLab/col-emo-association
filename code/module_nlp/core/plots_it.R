@@ -105,11 +105,13 @@ plot_both <- function(file_name, is_geo = F, save_both,
                       xlab = 'Valence', ylab = 'Arousal', style = scatter_theme) {
 
   data <- read.csv(paste0("../data/nlp/coordinates/", file_name), header = T, sep = ",", dec = ".", fill = T)
-  data$index <- toupper(data$index)
+  labels <- c('GREEN', 'ORANGE', 'YELLOW', 'BLUE', 'PURPLE', 'RED', 'SURPRISED', 'EXCITED', 'SERENE', 'HAPPY', 'SATISFIED',
+  'CALM', 'TIRED', 'BORED', 'DEPRESSED', 'SAD', 'FRUSTRATED', 'AFRAID', 'ANGRY',
+  'STRESSED', 'ASTONISHED', 'SLEEPY', 'ALARMED', 'DISGUSTED')
   if (!is_geo) {
   cols <- as.character(data$fill_color)
   names(cols) <- as.character(data$index)
-  both <- ggplot(data, mapping = aes(x = z_valence, y = z_arousal, label = index)) +
+  both <- ggplot(data, mapping = aes(x = z_valence, y = z_arousal, label = labels)) +
     geom_point(aes(size = 6, colour = fill_color), show.legend = F) +
     scale_color_identity() +
     geom_text(size = 0) +
@@ -183,7 +185,7 @@ switch (args,
   "plot_emotions" = plot_emotions(file_name = "osgood_coords_it.csv",
                           save_emotions = "supp1B.svg"),
   "plot_both" = plot_both(file_name = "osgood_coords_it.csv",
-                          save_both = "supp7E.svg"),
+                          save_both = "supp1E.svg"),
   "rdm_osgood_col" = rdm_corr(c("it/sighted/colors_spearman1.csv",
                                 "it/sighted/colors_spearman2.csv"),
                               y_position = 0.6, ylim = c(-0.2,0.9),

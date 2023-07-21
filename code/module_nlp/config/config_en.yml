@@ -102,17 +102,17 @@ rdm_difference:
 #-----------------------------------------------------------------------------#
 # osgood.coloremotion_associate()
 #-----------------------------------------------------------------------------#
-diff_associate:
+coloremotion_associate:
   # Where to save the mean across subjects of color-emotion associations
   human_associations: /data/nlp/associations/ColorEmotionMean.csv
   # List with the color and emotion words to use in the analysis
-  color_words: &color_words
-  emotion_words: &emotion_words
+  color_words: *color_words
+  emotion_words: *emotion_words
   # Path to the coordinates of color and emotion words the osgood dimensions 
   path_centroids: /data/nlp/coordinates/osgood_coords.csv
   # Where to save the results of the correlation (coefficient and p-value)
-  corr_save1: data/nlp/coordinates/osgoodspace1.csv
-  corr_save2: data/nlp/coordinates/osgoodspace2.csv
+  corr_save1: /data/nlp/coordinates/osgoodspace1.csv
+  corr_save2: /data/nlp/coordinates/osgoodspace2.csv
   # Path to the feather file containing the english wiki-news-300d-1M model
   # embeddings
   model_path: *model_path

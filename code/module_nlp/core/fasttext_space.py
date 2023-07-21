@@ -633,7 +633,7 @@ def coloremotion_associate(config: dict) -> pd.DataFrame:
 
     #--- Compute RDM in the reduced fasttext space ---#
     # Do PCA
-    fasttext_2d = pca.compute_pca(data)[0]
+    fasttext_2d = ce.compute_pca(data)[0]
     model_2d = ce.Embeddings(fasttext_2d.iloc[:,0:3])
     words_flat = [i for sub in list(select_words.values()) for i in sub]
     model_2d.model.set_index('index', inplace=True)

@@ -199,6 +199,6 @@ switch (args,
   "rdm_osgood_both" = rdm_corr(c("it/sighted/osgoodspace1.csv",
                                "it/sighted/osgoodspace2.csv"),
                              y_position = 0.6, ylim = c(-0.1,0.9),
-                             file_name = "7F.svg",
+                             file_name = "supp1F.svg",
                              plabels = c("**", "", "", "")),
 )

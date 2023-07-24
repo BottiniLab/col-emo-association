@@ -99,3 +99,25 @@ rdm_difference:
   path_centroids: '/data/nlp/coordinates/osgood_coords_it.csv'
   # Where to save the tables with correlations and p-values (folder)
   path_results: /data/nlp/correlations/it/sighted/
+
+
+#-----------------------------------------------------------------------------#
+# osgood.coloremotion_associate()
+#-----------------------------------------------------------------------------#
+coloremotion_associate:
+  # Where to save the mean across subjects of color-emotion associations
+  human_associations: /data/nlp/associations/ColorEmotionMean_sighted.csv
+  # List with the color and emotion words to use in the analysis
+  color_words: *color_words
+  emotion_words: *emotion_words
+  # Path to the coordinates of color and emotion words the osgood dimensions 
+  path_centroids: /data/nlp/coordinates/osgood_coords_it.csv
+  # Where to save the results of the correlation (coefficient and p-value)
+  corr_save1: /data/nlp/correlations/it/sighted/osgoodspace1.csv
+  corr_save2: /data/nlp/correlations/it/sighted/osgoodspace2.csv
+  # Path to the feather file containing the english wiki-news-300d-1M model
+  # embeddings
+  model_path: *model_path
+  # Path to the csv file holding the coordinates of colors and emotions in the
+  # control space
+  path2control: /data/nlp/coordinates/control_coords_it.csv

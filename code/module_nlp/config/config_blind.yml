@@ -9,18 +9,13 @@
 # embeddings
 define: &model_path /data/nlp/models/cc.it.300.feather
 # Path to the original human generated colour and emotion wheel coordinates
-define: &path_col_wheel '/data/nlp/wheels/it/sighted/colorwheel_coords.csv'
-define: &path_em_wheel '/data/nlp/wheels/it/sighted/emotionwheel_coords.csv'
+define: &path_col_wheel '/data/nlp/wheels/it/blind/colorwheel_coords.csv'
+define: &path_em_wheel '/data/nlp/wheels/it/blind/emotionwheel_coords.csv'
 # Path to the csv file holding the coordinates of colors and emotions in the control space
 define: &path2control  '/Data/Osgood/Coordinates/centroids_control.csv'
 # Osgood representative words:
 define: &valence [positivo, negativo]
 define: &arousal [attivo, tranquillo]
-# Path to the raw single subjects similarity matrices (.npy file) of the blind
-# participants
-define: &raw_emotions_blind /Data/Color_words/participantsColorTestingItalianBlind.npy
-define: &raw_colors_blind /Data/Color_words/participantsEmotionTestingItalianBlind.npy
-define: &raw_associate_blind /Data/Color_words/participantsEmotionColorAssociationTestingItalianBlind.npy
 # Mapping between english and italian color and emotion words
 define: &emotion_words [sorpreso, entusiasta, sereno, allegro, soddisfatto,
   calmo, stanco, annoiato, depresso, triste, frustrato, spaventato, arrabbiato,
@@ -52,8 +47,7 @@ get_wheel:
 #-----------------------------------------------------------------------------#
 # Get coordinates of colors and emotionsin the control dimensions
 get_control_wheel:
-  # Path to the feather file containing the english wiki-news-300d-1M model
-  # embeddings
+  # Path to the feather file containing the embeddings
   model: *model_path
   # Osgood representative words
   valence: ['Nord', 'Sud']
@@ -74,13 +68,13 @@ control_rdm:
   # Path the .csv file with the coordinates of color and emotion words in the
   # control spaces computed with debiaswe method
   path2control: /data/nlp/coordinates/control_coords_it.csv
-  # Path to the glove model
+  # Path to the model
   model_path: *model_path
   # List with the color and emotions words to use int he analysis
   color_words: *color_words
   emotion_words: *emotion_words
   # Path to the folder where to save the control matrices
-  save_control: '/data/nlp/RDMs/it/'
+  save_control: '/data/nlp/RDMs/it/blind'
 
 #-----------------------------------------------------------------------------#
 # osgood.osgood_rdm()                                                          #

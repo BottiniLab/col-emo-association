@@ -281,6 +281,7 @@ def osgood_rdm(config) -> None:
         rdm_fasttext1,
         rdm_fasttext2d1,
         rdm_control1,
+        fig_number,
     ):
         # Remove upper half diagonal
         rdm_human = ce.del_upper(rdm_human1)
@@ -369,96 +370,6 @@ def osgood_rdm(config) -> None:
             index=["fasttext", "fasttext2d", "controlsapce"],
             columns=["p_val", "r_coef"],
         )
-        # --- Plot the 4 RSM ---#
-        # labels = osgoodaxes_df['index'].values
-        # title_x = 0.5
-        # width = 800
-        # height = 800
-        # font=dict(
-        #     size=15
-        #     )
-        #
-        # fig1 = px.imshow(rdm_osgoodspace1,
-        #             title='Osgood space',
-        #             x=labels,
-        #             y=labels,
-        #             color_continuous_scale = 'RdBu',
-        #             width = width,
-        #             height = height
-        #            )
-        #
-        # fig1.update_xaxes(tickangle= 30)
-        # fig1.update_layout(
-        #     title_x=title_x,
-        #     font=font
-        #     )
-        #
-        # fig2 = px.imshow(rdm_fasttext1,
-        #             title='Fasttext space',
-        #             x=labels,
-        #             y=labels,
-        #             color_continuous_scale = 'RdBu',
-        #             width = width,
-        #             height = height
-        #            )
-        #
-        # fig2.update_xaxes(tickangle= 30)
-        # fig2.update_layout(
-        #     title_x=title_x,
-        #     font=font
-        #     )
-        #
-        # fig3 = px.imshow(rdm_fasttext2d1,
-        #             title='Fasttext reduced space',
-        #             x=labels,
-        #             y=labels,
-        #             color_continuous_scale = 'RdBu',
-        #             width = width,
-        #             height = height
-        #            )
-        #
-        # fig3.update_xaxes(tickangle= 30)
-        # fig3.update_layout(
-        #     title_x=title_x,
-        #     font=font
-        #     )
-        #
-        # fig4 = px.imshow(rdm_control1,
-        #             title='Control space',
-        #             x=labels,
-        #             y=labels,
-        #             color_continuous_scale = 'RdBu',
-        #             width = width,
-        #             height = height
-        #            )
-        #
-        # fig4.update_xaxes(tickangle= 30)
-        # fig4.update_layout(
-        #     title_x=title_x,
-        #     font=font
-        #     )
-        #
-        # fig5 = px.imshow(rdm_human1,
-        #             title='Human ratings',
-        #             x=labels,
-        #             y=labels,
-        #             color_continuous_scale = 'RdBu',
-        #             width = width,
-        #             height = height
-        #            )
-        #
-        # fig5.update_xaxes(tickangle= 30)
-        # fig5.update_layout(
-        #     title_x=title_x,
-        #     font=font
-        #     )
-
-        # Save images to disk
-        # fig1.write_image("../figures/supp1A.svg", format="svg", engine="kaleido")
-        # fig2.write_image("../figures/supp1B.svg", format="svg", engine="kaleido")
-        # fig3.write_image("../figures/supp1C.svg", format="svg", engine="kaleido")
-        # fig4.write_image("../figures/supp1D.svg", format="svg", engine="kaleido")
-        # fig5.write_image("../figures/supp1E.svg", format="svg", engine="kaleido")
 
         # --- Plot correlation scatterplot ---#
         osgood_flatten = pd.DataFrame(
@@ -499,8 +410,8 @@ def osgood_rdm(config) -> None:
         plt.suptitle("r =  " + str(round(corr_osgoodspace[0], 3)), y=0.92)
         plt.xlabel("Human ratings (euclidean distance)")
         plt.ylabel("Osgood space (euclidean distance)")
-        plt.savefig("../figures/supp1F.svg")
-        plt.close()
+        plt.savefig("../figures/" + fig_number[0] + ".svg")
+        plt.show()
         sns.lmplot(
             x="Human ratings",
             y="Fasttext",
@@ -515,8 +426,8 @@ def osgood_rdm(config) -> None:
         plt.suptitle("r =  " + str(round(corr_fasttext[0], 3)), y=0.92)
         plt.xlabel("Human ratings (euclidean distance)")
         plt.ylabel("Fasttext space (cosine distance)")
-        plt.savefig("../figures/supp1G.svg")
-        plt.close()
+        plt.savefig("../figures/" + fig_number[1] + ".svg")
+        plt.show()
         sns.lmplot(
             x="Human ratings",
             y="Fasttext2D",
@@ -531,8 +442,8 @@ def osgood_rdm(config) -> None:
         plt.suptitle("r =  " + str(round(corr_fasttext2d[0], 3)), y=0.92)
         plt.xlabel("Human ratings (euclidean distance)")
         plt.ylabel("Fasttext 2D space (euclidean distance)")
-        plt.savefig("../figures/supp1H.svg")
-        plt.close()
+        plt.savefig("../figures/" + fig_number[2] + ".svg")
+        plt.show()
         sns.lmplot(
             x="Human ratings",
             y="Controlspace",
@@ -547,8 +458,8 @@ def osgood_rdm(config) -> None:
         plt.suptitle("r =  " + str(round(corr_control[0], 3)), y=0.92)
         plt.xlabel("Human ratings (euclidean distance)")
         plt.ylabel("Control space (euclidean distance)")
-        plt.savefig("../figures/supp1I.svg")
-        plt.close()
+        plt.savefig("../figures/" + fig_number[3] + ".svg")
+        plt.show()
 
         return diff_df, corr_df
 
@@ -624,6 +535,7 @@ def osgood_rdm(config) -> None:
                 rdm_fasttext.values,
                 rdm_fasttext2d.values,
                 rdm_control1=rdm_control,
+                fig_number=["supp1A", "supp1B", "supp1C", "supp1D"],
             )
             corr_col.to_csv(".." + path_results + "colors_spearman1.csv")
             diff_col.to_csv(".." + path_results + "colors_spearman2.csv")
@@ -673,12 +585,13 @@ def osgood_rdm(config) -> None:
                 rdm_fasttext.values,
                 rdm_fasttext2d.values,
                 rdm_control1=rdm_control,
+                fig_number=["supp1E", "supp1F", "supp1G", "supp1H"],
             )
             corr_em.to_csv(".." + path_results + "emotions_spearman1.csv")
             diff_em.to_csv(".." + path_results + "emotions_spearman2.csv")
 
 
-def coloremotion_associate(config: dict) -> pd.DataFrame:
+def coloremotion_associate(config: dict, fig_number: list) -> pd.DataFrame:
     """Compute correlation between human color-emotion judgements and artificial
     distances"""
 
@@ -930,6 +843,7 @@ def coloremotion_associate(config: dict) -> pd.DataFrame:
     plt.suptitle("r =  " + str(round(corr_lowdim[0], 3)), y=0.92)
     plt.xlabel("Human ratings")
     plt.ylabel("Osgood space (euclidean distance)")
+    plt.savefig("../figures/" + fig_number[0] + ".svg")
     plt.show()
     sns.lmplot(
         x="Human ratings",
@@ -945,6 +859,7 @@ def coloremotion_associate(config: dict) -> pd.DataFrame:
     plt.suptitle("r =  " + str(round(corr_300d[0], 3)), y=0.92)
     plt.xlabel("Human ratings")
     plt.ylabel("Fasttext space (cosine distance)")
+    plt.savefig("../figures/" + fig_number[1] + ".svg")
     plt.show()
     sns.lmplot(
         x="Human ratings",
@@ -960,6 +875,7 @@ def coloremotion_associate(config: dict) -> pd.DataFrame:
     plt.suptitle("r =  " + str(round(corr_2d[0], 3)), y=0.92)
     plt.xlabel("Human ratings")
     plt.ylabel("Fasttext 2D space (euclidean distance)")
+    plt.savefig("../figures/" + fig_number[2] + ".svg")
     plt.show()
     sns.lmplot(
         x="Human ratings",
@@ -975,118 +891,7 @@ def coloremotion_associate(config: dict) -> pd.DataFrame:
     plt.suptitle("r =  " + str(round(corr_control[0], 3)), y=0.92)
     plt.xlabel("Human ratings")
     plt.ylabel("Control space (euclidean distance)")
-    plt.show()
-
-    # --- Plot the 3 RDM ---#
-    labels_y = overall_df.index.values
-    labels_x = overall_df.columns.values
-    title_x = 0.5
-    width = 650
-    height = 650
-    font = dict(size=15)
-
-    fig1 = px.imshow(
-        overall_df.values,
-        title="Human ratings",
-        x=labels_x,
-        y=labels_y,
-        color_continuous_scale="RdBu",
-        width=width,
-        height=height,
-    )
-
-    fig1.update_xaxes(tickangle=30)
-    fig1.update_layout(title_x=title_x, font=font)
-
-    fig2 = px.imshow(
-        euclidean_distances.values,
-        title="Osgood space",
-        x=labels_x,
-        y=labels_y,
-        color_continuous_scale="RdBu",
-        width=width,
-        height=height,
-    )
-
-    fig2.update_xaxes(tickangle=30)
-    fig2.update_layout(title_x=title_x, font=font)
-
-    fig3 = px.imshow(
-        cos_distances.values,
-        title="Fasttext space",
-        x=labels_x,
-        y=labels_y,
-        color_continuous_scale="RdBu",
-        width=width,
-        height=height,
-    )
-
-    fig3.update_xaxes(tickangle=30)
-    fig3.update_layout(
-        title_x=title_x,
-        font=font,
-    )
-
-    fig4 = px.imshow(
-        rdm_fasttext2d.values,
-        title="Fasttext 2d space",
-        x=labels_x,
-        y=labels_y,
-        color_continuous_scale="RdBu",
-        width=width,
-        height=height,
-    )
-
-    fig4.update_xaxes(tickangle=30)
-    fig4.update_layout(
-        title_x=title_x,
-        font=font,
-    )
-
-    fig5 = px.imshow(
-        control_distances.values,
-        title="Control space",
-        x=labels_x,
-        y=labels_y,
-        color_continuous_scale="RdBu",
-        width=width,
-        height=height,
-    )
-
-    fig5.update_xaxes(tickangle=30)
-    fig5.update_layout(
-        title_x=title_x,
-        font=font,
-    )
-
-    # figures = {'fig1': fig1,
-    #            'fig2': fig2,
-    #            'fig3': fig3,
-    #            'fig4': fig4,
-    #            'fig5': fig5,
-    #            'plt': plt}
-    #
-    # fig1.show()
-    # fig2.show()
-    # fig3.show()
-    # fig4.show()
-    # fig5.show()
-    plt.hist(diff_null, bins=50)
-    plt.suptitle("Permuatation distribution of correlation differences - 300D")
-    plt.title("p-value: " + str(round(p_val, 3)))
-    plt.axvline(x=diff_corr, ymax=0.7, color="red")
-    plt.show()
-
-    plt.hist(diff_null2d, bins=50)
-    plt.suptitle("Permuatation distribution of correlation differences - 2D")
-    plt.title("p-value: " + str(round(p_val2d, 3)))
-    plt.axvline(x=diff_corr, ymax=0.7, color="red")
-    plt.show()
-
-    plt.hist(diff_nullcont, bins=50)
-    plt.suptitle("Permuatation distribution of correlation differences - control")
-    plt.title("p-value: " + str(round(p_valcont, 3)))
-    plt.axvline(x=diff_corrcont, ymax=0.7, color="red")
+    plt.savefig("../figures/" + fig_number[3] + ".svg")
     plt.show()
 
     return osgood_flatten

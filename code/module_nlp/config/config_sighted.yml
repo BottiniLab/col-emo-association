@@ -86,7 +86,7 @@ rdm_difference:
   # Path to the human generated colour wheel
   path_col_wheel: *path_col_wheel
   # Path to the folder with the control RDMs
-  path2control_rdm: /data/nlp/RDMs/it/
+  path2control_rdm: /data/nlp/RDMs/it/sighted/
   # List with the color words to use int he analysis
   color_words: *color_words
   emotion_words: *emotion_words

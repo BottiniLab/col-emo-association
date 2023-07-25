@@ -254,7 +254,7 @@ def control_rdm(config: dict) -> None:
         rdm_control_df.to_csv(".." + save_control + words + "_controlspace.csv")
 
 
-def osgood_rdm(config) -> None:
+def osgood_rdm(config: dict, fig_number: list) -> None:
     """Same analysis as the previous function but in the Osgood space"""
 
     # --- Read config ---#
@@ -535,7 +535,7 @@ def osgood_rdm(config) -> None:
                 rdm_fasttext.values,
                 rdm_fasttext2d.values,
                 rdm_control1=rdm_control,
-                fig_number=["supp1A", "supp1B", "supp1C", "supp1D"],
+                fig_number=fig_number[:4],
             )
             corr_col.to_csv(".." + path_results + "colors_spearman1.csv")
             diff_col.to_csv(".." + path_results + "colors_spearman2.csv")
@@ -585,7 +585,7 @@ def osgood_rdm(config) -> None:
                 rdm_fasttext.values,
                 rdm_fasttext2d.values,
                 rdm_control1=rdm_control,
-                fig_number=["supp1E", "supp1F", "supp1G", "supp1H"],
+                fig_number=fig_number[4:8],
             )
             corr_em.to_csv(".." + path_results + "emotions_spearman1.csv")
             diff_em.to_csv(".." + path_results + "emotions_spearman2.csv")

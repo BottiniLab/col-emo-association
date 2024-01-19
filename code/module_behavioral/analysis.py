@@ -6,6 +6,7 @@ import circle_fit as cf
 from colormath.color_objects import sRGBColor, HSLColor
 from colormath.color_conversions import convert_color
 
+
 def reduce_dimensions(matrix, dims=2):
     pca = PCA(n_components=dims)
     embedding = pca.fit_transform(matrix)
@@ -13,29 +14,38 @@ def reduce_dimensions(matrix, dims=2):
     return embedding
 
 
-def emotion_positions_based_on_associations(color_embedding, average_emotion_color_ranking_matrix):
-
-    N = average_emotion_color_ranking_matrix.shape[0] # set number of emotions
-    emotion_colors_based_on_positions = np.zeros((N, 2)) # since we only do two dimensional PCA
+def emotion_positions_based_on_associations(
+    color_embedding, average_emotion_color_ranking_matrix
+):
+    N = average_emotion_color_ranking_matrix.shape[0]  # set number of emotions
+    emotion_colors_based_on_positions = np.zeros(
+        (N, 2)
+    )  # since we only do two dimensional PCA
 
     for i in range(0, average_emotion_color_ranking_matrix.shape[0]):
         x = 0
         y = 0
         for j in range(0, average_emotion_color_ranking_matrix[i, :].shape[0]):
-            x = color_embedding[j, 0]*average_emotion_color_ranking_matrix[i, j]+x
-            y = color_embedding[j, 1]*average_emotion_color_ranking_matrix[i, j]+y
+            x = color_embedding[j, 0] * average_emotion_color_ranking_matrix[i, j] + x
+            y = color_embedding[j, 1] * average_emotion_color_ranking_matrix[i, j] + y
         emotion_colors_based_on_positions[i, 0] = x
         emotion_colors_based_on_positions[i, 1] = y
 
     return emotion_colors_based_on_positions
 
-def emotion_colors(color_embedding, color_ranking_matrix, rgb_values):
 
-    emotion_colors_based_on_positions = emotion_positions_based_on_associations(color_embedding, color_ranking_matrix)
+def emotion_colors(color_embedding, color_ranking_matrix, rgb_values):
+    emotion_colors_based_on_positions = emotion_positions_based_on_associations(
+        color_embedding, color_ranking_matrix
+    )
     total_emotions = len(color_ranking_matrix)
 
-    distancesColorContributions = pairwise_distances(color_embedding, emotion_colors_based_on_positions)
-    colorEmotionProfile = distancesColorContributions.T # transpose to make things easier.
+    distancesColorContributions = pairwise_distances(
+        color_embedding, emotion_colors_based_on_positions
+    )
+    colorEmotionProfile = (
+        distancesColorContributions.T
+    )  # transpose to make things easier.
 
     # for each emotion, we pick the two colors closest to it and normalise it based on the distance.
 
@@ -44,71 +54,87 @@ def emotion_colors(color_embedding, color_ranking_matrix, rgb_values):
         row = colorEmotionProfile[idx, :]
         x = np.argsort(row)
 
-        #normalize the two colors by distance, so that the one closer gets higher weightage
+        # normalize the two colors by distance, so that the one closer gets higher weightage
         contrib = row[x[0:2]]
-        contrib = contrib/contrib.min()
-        contrib = contrib/contrib.sum()
-        contrib = 1-contrib
+        contrib = contrib / contrib.min()
+        contrib = contrib / contrib.sum()
+        contrib = 1 - contrib
         y = np.zeros((1, 3))
         for j in range(0, len(contrib)):
             for i in range(0, 3):
-                y[0, i] = y[0, i]+contrib[j]*rgb_values[x[j], i]
+                y[0, i] = y[0, i] + contrib[j] * rgb_values[x[j], i]
         averageColors[idx] = y
 
-    #set maximum to one
-    averageColors[averageColors>1] = 1
+    # set maximum to one
+    averageColors[averageColors > 1] = 1
 
     return averageColors
 
 
 def distance_from_centre(center_coordinate, coordinates):
-
     distances = []
     for c in coordinates:
-        distances.append(np.linalg.norm(c-center_coordinate))
+        distances.append(np.linalg.norm(c - center_coordinate))
     distances = np.asarray(distances)
     return distances
 
-def average_emotion_color(color_ranking_matrix, rgb_values):
 
-    averageRGBColors = np.zeros((color_ranking_matrix.shape[0],3))
+def average_emotion_color(color_ranking_matrix, rgb_values):
+    averageRGBColors = np.zeros((color_ranking_matrix.shape[0], 3))
     for i in range(0, color_ranking_matrix.shape[0]):
         x = 0
         y = 0
         z = 0
         for j in range(0, color_ranking_matrix[i, :].shape[0]):
-            x = rgb_values[j, 0]*color_ranking_matrix[i, j]+x
-            y = rgb_values[j, 1]*color_ranking_matrix[i, j]+y
-            z = rgb_values[j, 2]*color_ranking_matrix[i, j]+z
+            x = rgb_values[j, 0] * color_ranking_matrix[i, j] + x
+            y = rgb_values[j, 1] * color_ranking_matrix[i, j] + y
+            z = rgb_values[j, 2] * color_ranking_matrix[i, j] + z
 
         averageRGBColors[i, 0] = x
         averageRGBColors[i, 1] = y
         averageRGBColors[i, 2] = z
 
     return averageRGBColors
-def circle_fitting_and_regression(emotion_embedding, color_embedding, color_ranking_matrix, rgb_values):
 
+
+def circle_fitting_and_regression(
+    emotion_embedding, color_embedding, color_ranking_matrix, rgb_values
+):
     center_x, center_y, radius, error = cf.hyper_fit(emotion_embedding)
     center_emotion = np.asarray([center_x, center_y])
 
-    #calculate distance of emotions from emotion center
+    # calculate distance of emotions from emotion center
     emotion_center_distances = distance_from_centre(center_emotion, emotion_embedding)
 
-    #calculate distance of emotion positions weighed by color choices from the center of color embedding
+    # calculate distance of emotion positions weighed by color choices from the center of color embedding
     center_color = np.mean(color_embedding, axis=0)
-    emotion_colors_based_on_positions = emotion_positions_based_on_associations(color_embedding, color_ranking_matrix)
-    color_center_distances = distance_from_centre(center_color, emotion_colors_based_on_positions)
+    emotion_colors_based_on_positions = emotion_positions_based_on_associations(
+        color_embedding, color_ranking_matrix
+    )
+    color_center_distances = distance_from_centre(
+        center_color, emotion_colors_based_on_positions
+    )
 
-    #calculate distance of average emotion color choices from grey
-    grey = np.asarray([128, 128, 128])/255
+    # calculate distance of average emotion color choices from grey
+    grey = np.asarray([128, 128, 128]) / 255
     emotions_colors_average = average_emotion_color(color_ranking_matrix, rgb_values)
     grey_center_distance = distance_from_centre(grey, emotions_colors_average)
 
-    return center_emotion, radius, emotion_center_distances, color_center_distances, grey_center_distance
+    return (
+        center_emotion,
+        radius,
+        emotion_center_distances,
+        color_center_distances,
+        grey_center_distance,
+    )
 
 
-def sighted_blind_similarity(sighted_color_embedding, sighted_average_color_emotion_association, blind_color_matrix, blind_color_emotion_association_matrix):
-
+def sighted_blind_similarity(
+    sighted_color_embedding,
+    sighted_average_color_emotion_association,
+    blind_color_matrix,
+    blind_color_emotion_association_matrix,
+):
     sighted_color_pairwise = pairwise_distances(sighted_color_embedding)
 
     ##for blind participants, do PCA on their individual color matrices
@@ -121,30 +147,39 @@ def sighted_blind_similarity(sighted_color_embedding, sighted_average_color_emot
     ##we calculate how similar their individual color wheel is to the sighted average
     color_stability = []
     for p in blind_color_emotion_association_matrix.keys():
-        color_stability.append(kendalltau(participants_color_pca_pairwise_distance[p], sighted_color_pairwise)[0])
+        color_stability.append(
+            kendalltau(
+                participants_color_pca_pairwise_distance[p], sighted_color_pairwise
+            )[0]
+        )
     color_stability = np.asarray(color_stability)
 
     ##we calculate how similar their individual color-emotion associations are to the sighted average
     color_emotion_stability = []
     for p in blind_color_emotion_association_matrix.keys():
-        color_emotion_stability.append(kendalltau(blind_color_emotion_association_matrix[p], sighted_average_color_emotion_association)[0])
+        color_emotion_stability.append(
+            kendalltau(
+                blind_color_emotion_association_matrix[p],
+                sighted_average_color_emotion_association,
+            )[0]
+        )
     color_emotion_stability = np.asarray(color_emotion_stability)
 
     return color_stability, color_emotion_stability
 
 
 def closest_color(matrix1, matrix2):
-
     closest_colors = []
     for c1 in matrix1:
         distances = []
         for c2 in matrix2:
-            distances.append(np.linalg.norm(c1-c2))
+            distances.append(np.linalg.norm(c1 - c2))
         idx = np.argsort(distances)
         closest_colors.append(idx[0])
     closest_colors = np.asarray(closest_colors)
 
     return closest_colors
+
 
 def convert_array_to_hsl(rgbarray):
     hslvalues = []
@@ -156,10 +191,86 @@ def convert_array_to_hsl(rgbarray):
     return hslvalues
 
 
+def randomcolorassignment(total_colors):
+    weightmatrix = np.random.dirichlet(np.ones(total_colors), 1).reshape(
+        -1,
+    )
+    return weightmatrix
 
 
+def averagecolorembedding(color_embedding, total_emotions, total_colors):
+    averages = np.zeros((total_emotions, 2))
+    for i in range(0, total_emotions):
+        x = 0
+        y = 0
+        weights = randomcolorassignment(total_colors)
+        for j in range(0, len(weights)):
+            x = color_embedding[j, 0] * weights[j] + x
+            y = color_embedding[j, 1] * weights[j] + y
+        averages[i, 0] = x
+        averages[i, 1] = y
+    return averages
 
 
+def closestemotion(emotion_embedding, color_embedding, color_labels, emotion_labels):
+    # code for selecting the closest emotion for each color
 
+    distancesColorContributions = pairwise_distances(color_embedding, emotion_embedding)
+    colorEmotionProfile = distancesColorContributions.T
+
+    temporiginal = np.copy(colorEmotionProfile)
+    tempwithemotionsremoved = np.copy(colorEmotionProfile)
+    temp_emotion_labels = np.copy(emotion_labels)
+    temp_color_labels = np.copy(color_labels)
+
+    originalmapping = {}
+
+    for idx in range(0, len(color_labels)):
+        i = (temporiginal).argsort(axis=None, kind="mergesort")  # use stable sort
+        j = np.unravel_index(i, temporiginal.shape)
+        e, c = np.vstack(j).T[0]
+
+        originalmapping[temp_color_labels[c]] = temp_emotion_labels[e]
+
+        temp_emotion_labels = np.delete(temp_emotion_labels, e, axis=0)
+        temp_color_labels = np.delete(temp_color_labels, c, axis=0)
+        temporiginal = np.delete(temporiginal, e, axis=0)  # delete emotion row
+        temporiginal = np.delete(temporiginal, c, axis=1)  # delete color column
+        tempwithemotionsremoved = np.delete(
+            tempwithemotionsremoved, e, axis=0
+        )  # delete emotion row
+
+    chosenEmotions = np.zeros((len(color_labels), 2))
+    colorIndexMapping = {}
+    emotionIndexMapping = {}
+
+    # set up color index and emotion indices.
+    for idx in range(len(color_labels)):
+        colorIndexMapping[color_labels[idx]] = idx
+
+    for idx in range(len(emotion_labels)):
+        emotionIndexMapping[emotion_labels[idx]] = idx
+
+    for color in color_labels:
+        el = originalmapping[color]
+        chosenEmotions[colorIndexMapping[color]] = emotion_embedding[
+            emotionIndexMapping[el]
+        ]
+
+    return chosenEmotions, originalmapping
+
+
+def checkvalue(rearranged, color_embedding, originalr):
+    reqdforplt = []
+    [r, p] = kendalltau(
+        pairwise_distances(rearranged), pairwise_distances(color_embedding)
+    )
+    if p < 0.0001:
+        if r > originalr:
+            return [1, r]
+        else:
+            return [0, r]
+    else:
+        return [0, r]
 
 

@@ -32,6 +32,8 @@ axes.spines.right: False
 xtick.labelsize: 16
 ytick.labelsize: 16
 axes.labelsize: 16
+axes.titlesize: 20
+figure.facecolor: white
 
 
 # Custom
